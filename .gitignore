@@ -1,52 +1,82 @@
-# Prerequisites
-*.d
+# Log
+*.log
 
-# Object files
-*.o
-*.ko
-*.obj
-*.elf
+# generated folders
+*.cache/*
+*.sim/*
+*.hw/*
+*.runs/*
+*.ip_user_files/*
 
-# Linker output
-*.ilk
-*.map
-*.exp
+### Not ignore
+!*.jou
+!*.vhd
+!*.v
+!*.bd
+!*.edif
+!*.xdc
+!*.tcl
+!*.jou
+!*.rpt
+!*.txt
+!*.vdi
 
-# Precompiled Headers
-*.gch
-*.pch
+# intermediate build files
+*.bgn
+*.bld
+*.cmd_log
+*.drc
+*.ll
+*.lso
+*.msd
+*.msk
+*.ncd
+*.ngc
+*.ngd
+*.ngr
+*.pad
+*.par
+*.pcf
+*.prj
+*.ptwx
+*.rbb
+*.rbd
+*.stx
+*.syr
+*.twr
+*.twx
+*.unroutes
+*.ut
+*.xpi
+*.xst
+*_bitgen.xwbt
+*_envsettings.html
+*_map.map
+*_map.mrp
+*_map.ngm
+*_map.xrpt
+*_ngdbuild.xrpt
+*_pad.csv
+*_pad.txt
+*_par.xrpt
+*_summary.html
+*_summary.xml
+*_usage.xml
+*_xst.xrpt
 
-# Libraries
-*.lib
-*.a
-*.la
-*.lo
+# iMPACT generated files
+_impactbatch.log
+impact.xsl
+impact_impact.xwbt
+ise_impact.cmd
+webtalk_impact.xml
 
-# Shared objects (inc. Windows DLLs)
-*.dll
-*.so
-*.so.*
-*.dylib
+# Core Generator generated files
+xaw2verilog.log
 
-# Executables
-*.exe
-*.out
-*.app
-*.i*86
-*.x86_64
-*.hex
-
-# Debug files
-*.dSYM/
-*.su
-*.idb
-*.pdb
-
-# Kernel Module Compile Results
-*.mod*
-*.cmd
-.tmp_versions/
-modules.order
-Module.symvers
-Mkfile.old
-dkms.conf
+# project-wide generated files
+*.gise
+par_usage_statistics.html
+usage_statistics_webtalk.html
+webtalk.log
+webtalk_pn.xml

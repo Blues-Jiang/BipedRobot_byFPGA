@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="test_func_synth.wdb" id="1">
+         <top_modules>
+            <top_module name="glbl" />
+            <top_module name="test" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="17097045000000fs"></ZoomStartTime>
+      <ZoomEndTime time="25617045000001fs"></ZoomEndTime>
+      <Cursor1Time time="19757045000000fs"></Cursor1Time>
+   </zoom_setting>
+   <WVObjectSize size="28" />
+   <wvobject db_ref_id="1" fp_name="/test/clk" type="logic">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/test/rst_n" type="logic">
+      <obj_property name="ElementShortName">rst_n</obj_property>
+      <obj_property name="ObjectShortName">rst_n</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/test/pwm_L1" type="logic">
+      <obj_property name="ElementShortName">pwm_L1</obj_property>
+      <obj_property name="ObjectShortName">pwm_L1</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/test/pwm_L2" type="logic">
+      <obj_property name="ElementShortName">pwm_L2</obj_property>
+      <obj_property name="ObjectShortName">pwm_L2</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/test/pwm_L3" type="logic">
+      <obj_property name="ElementShortName">pwm_L3</obj_property>
+      <obj_property name="ObjectShortName">pwm_L3</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/test/pwm_R1" type="logic">
+      <obj_property name="ElementShortName">pwm_R1</obj_property>
+      <obj_property name="ObjectShortName">pwm_R1</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/test/pwm_R2" type="logic">
+      <obj_property name="ElementShortName">pwm_R2</obj_property>
+      <obj_property name="ObjectShortName">pwm_R2</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/test/pwm_R3" type="logic">
+      <obj_property name="ElementShortName">pwm_R3</obj_property>
+      <obj_property name="ObjectShortName">pwm_R3</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/test/uut/ins_pwm_ctrl/ins_clk_50Hz/clk_50Hz" type="logic">
+      <obj_property name="ElementShortName">clk_50Hz</obj_property>
+      <obj_property name="ObjectShortName">clk_50Hz</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/test/uut/ins_pwm_ctrl/ins_ActionGroupMem/addrb" type="array">
+      <obj_property name="ElementShortName">addrb[8:0]</obj_property>
+      <obj_property name="ObjectShortName">addrb[8:0]</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/test/uut/ins_pwm_ctrl/ins_ActionGroupMem/doutb" type="array">
+      <obj_property name="ElementShortName">doutb[63:0]</obj_property>
+      <obj_property name="ObjectShortName">doutb[63:0]</obj_property>
+      <obj_property name="Radix">HEXRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/test/uut/ins_pwm_ctrl/cur_duty_l1" type="array">
+      <obj_property name="ElementShortName">cur_duty_l1[7:0]</obj_property>
+      <obj_property name="ObjectShortName">cur_duty_l1[7:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/test/uut/ins_pwm_ctrl/nxt_duty_l1" type="array">
+      <obj_property name="ElementShortName">nxt_duty_l1[7:0]</obj_property>
+      <obj_property name="ObjectShortName">nxt_duty_l1[7:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/test/uut/ins_pwm_ctrl/cur_duty_l2" type="array">
+      <obj_property name="ElementShortName">cur_duty_l2[7:0]</obj_property>
+      <obj_property name="ObjectShortName">cur_duty_l2[7:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/test/uut/ins_pwm_ctrl/nxt_duty_l2" type="array">
+      <obj_property name="ElementShortName">nxt_duty_l2[7:0]</obj_property>
+      <obj_property name="ObjectShortName">nxt_duty_l2[7:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/test/uut/ins_pwm_ctrl/cur_duty_l3" type="array">
+      <obj_property name="ElementShortName">cur_duty_l3[7:0]</obj_property>
+      <obj_property name="ObjectShortName">cur_duty_l3[7:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/test/uut/ins_pwm_ctrl/nxt_duty_l3" type="array">
+      <obj_property name="ElementShortName">nxt_duty_l3[7:0]</obj_property>
+      <obj_property name="ObjectShortName">nxt_duty_l3[7:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/test/uut/ins_pwm_ctrl/cur_duty_r1" type="array">
+      <obj_property name="ElementShortName">cur_duty_r1[7:0]</obj_property>
+      <obj_property name="ObjectShortName">cur_duty_r1[7:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/test/uut/ins_pwm_ctrl/nxt_duty_r1" type="array">
+      <obj_property name="ElementShortName">nxt_duty_r1[7:0]</obj_property>
+      <obj_property name="ObjectShortName">nxt_duty_r1[7:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/test/uut/ins_pwm_ctrl/cur_duty_r2" type="array">
+      <obj_property name="ElementShortName">cur_duty_r2[7:0]</obj_property>
+      <obj_property name="ObjectShortName">cur_duty_r2[7:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/test/uut/ins_pwm_ctrl/nxt_duty_r2" type="array">
+      <obj_property name="ElementShortName">nxt_duty_r2[7:0]</obj_property>
+      <obj_property name="ObjectShortName">nxt_duty_r2[7:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/test/uut/ins_pwm_ctrl/cur_duty_r3" type="array">
+      <obj_property name="ElementShortName">cur_duty_r3[7:0]</obj_property>
+      <obj_property name="ObjectShortName">cur_duty_r3[7:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/test/uut/ins_pwm_ctrl/pwm_l1/out_pwm_l1" type="logic">
+      <obj_property name="ElementShortName">out_pwm_l1</obj_property>
+      <obj_property name="ObjectShortName">out_pwm_l1</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/test/uut/ins_pwm_ctrl/pwm_l2/out_pwm_l2" type="logic">
+      <obj_property name="ElementShortName">out_pwm_l2</obj_property>
+      <obj_property name="ObjectShortName">out_pwm_l2</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/test/uut/ins_pwm_ctrl/pwm_l3/out_pwm_l3" type="logic">
+      <obj_property name="ElementShortName">out_pwm_l3</obj_property>
+      <obj_property name="ObjectShortName">out_pwm_l3</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/test/uut/ins_pwm_ctrl/pwm_r1/out_pwm_r1" type="logic">
+      <obj_property name="ElementShortName">out_pwm_r1</obj_property>
+      <obj_property name="ObjectShortName">out_pwm_r1</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/test/uut/ins_pwm_ctrl/pwm_r2/out_pwm_r2" type="logic">
+      <obj_property name="ElementShortName">out_pwm_r2</obj_property>
+      <obj_property name="ObjectShortName">out_pwm_r2</obj_property>
+   </wvobject>
+   <wvobject db_ref_id="1" fp_name="/test/uut/ins_pwm_ctrl/pwm_r3/out_pwm_r3" type="logic">
+      <obj_property name="ElementShortName">out_pwm_r3</obj_property>
+      <obj_property name="ObjectShortName">out_pwm_r3</obj_property>
+   </wvobject>
+</wave_config>
