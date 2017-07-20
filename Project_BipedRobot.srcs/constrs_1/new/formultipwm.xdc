@@ -48,6 +48,7 @@ set_property -dict { PACKAGE_PIN K6 IOSTANDARD LVCMOS33 } [get_ports out_pwm_r3]
 #set_property -dict { PACKAGE_PIN M16 IOSTANDARD LVCMOS33 } [get_ports An_J20]; #An_J20
 #set_property -dict { PACKAGE_PIN P18 IOSTANDARD LVCMOS33 } [get_ports An_J19]; #An_J19
 
+#LED List
 #set_property -dict { PACKAGE_PIN D10 IOSTANDARD LVCMOS33 } [get_ports {LED[0]}];
 #set_property -dict { PACKAGE_PIN D9 IOSTANDARD LVCMOS33 } [get_ports {LED[1]}];
 #set_property -dict { PACKAGE_PIN C9 IOSTANDARD LVCMOS33 } [get_ports {LED[2]}];
