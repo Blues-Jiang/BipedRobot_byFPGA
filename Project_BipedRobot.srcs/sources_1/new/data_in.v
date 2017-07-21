@@ -32,9 +32,13 @@ output wire runLoopFlag;
 output wire run1StepFlag;
 //output wire setOffsetFlag;
 
+wire runLoopFlag_n,run1StepFlag_n;
+assign runLoopFlag = ~runLoopFlag_n;
+assign run1StepFlag = ~run1StepFlag_n;
+
 btn2btn sw_isRunning(.clk(clk),.rst_n(rst_n),.din(sw),.flag(isRunningFlag));
-btn2sw  btn_runLoop(.clk(clk),.rst_n(rst_n),.din(btn[0]),.flag(!runLoopFlag));
-btn2btn  btn_run1Step(.clk(clk),.rst_n(rst_n),.din(btn[1]),.flag(!run1StepFlag));
+btn2sw  btn_runLoop(.clk(clk),.rst_n(rst_n),.din(btn[0]),.flag(runLoopFlag_n));
+btn2btn  btn_run1Step(.clk(clk),.rst_n(rst_n),.din(btn[1]),.flag(run1StepFlag_n));
 //btn2sw btn_setOffset(.clk(clk),.rst_n(rst_n),.din(sw),.flag(!setOffsetFlag));
 
 endmodule
@@ -52,7 +56,7 @@ always @ (posedge clk or negedge rst_n)
 if (!rst_n) begin
     state <= SstableHigh;
     counter <= 32'd0;
-    flag <= 1'b0;
+    flag <= din;
 end
 else begin
     case(state)
@@ -66,7 +70,7 @@ else begin
             end
         end
         SunstableHigh: begin
-            if(counter >= 32'd2_000_000) begin
+            if(counter >= 32'd200_000) begin
                 counter <= 32'd0;
                 if ( din == 1'b0 )     state <= Snegedge;
                 else    state <= SstableHigh;
@@ -90,7 +94,7 @@ else begin
             end
         end
         SunstableLow: begin
-            if(counter >= 32'd2_000_000) begin
+            if(counter >= 32'd200_000) begin
                 counter <= 32'd0;
                 if ( din == 1'b1 )     state <= Sposedge;
                 else    state <= SstableLow;
@@ -121,7 +125,7 @@ always @ (posedge clk or negedge rst_n)
 if (!rst_n) begin
     state <= SstableHigh;
     counter <= 32'd0;
-    flag <= 1'b0;
+    flag <= din;
 end
 else begin
     case(state)

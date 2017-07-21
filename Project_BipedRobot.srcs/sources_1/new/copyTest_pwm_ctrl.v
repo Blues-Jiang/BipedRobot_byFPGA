@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date: 2017/07/10 17:05:28
+// Create Date: 2017/07/20 18:04:27
 // Design Name: 
-// Module Name: pwm_ctrl
+// Module Name: copyTest_pwm_ctrl
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
@@ -20,19 +20,19 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module pwm_ctrl(clk,rst_n,isRunningFlag,runLoopFlag,run1StepFlag,setOffsetFlag,out_pwm_l1,out_pwm_l2,out_pwm_l3,out_pwm_r1,out_pwm_r2,out_pwm_r3);
+module copyTest_pwm_ctrl(clk,rst_n,out_pwm_l1,out_pwm_l2,out_pwm_l3,out_pwm_r1,out_pwm_r2,out_pwm_r3);
 input clk,rst_n;
 //input [7:0] data;
 output wire out_pwm_l1,out_pwm_l2,out_pwm_l3,out_pwm_r1,out_pwm_r2,out_pwm_r3;//PWM Signal to drive Servos
 
 //Flag List
-//reg updateFlag;     //Depend on 50Hz clock.It's a flag to update the duty cycle
-input runLoopFlag;    //If you need to cycle the action group,this flag should be set as 1
-input run1StepFlag;   //Run action group step by step.
-input isRunningFlag;  //
-input setOffsetFlag;
+//reg updateFlag;     //Depend on 50kHz clock.It's a flag to update the duty cycle
+reg runLoopFlag;    //If you need to cycle the action group,this flag should be set as 1
+reg run1StepFlag;   //Run action group step by step.
+reg isRunningFlag;  //
+reg setOffsetFlag;
 
-wire clk_100kHz,clk_50Hz,clk_50Hz_pulse;
+wire clk_100MHz,clk_50kHz,clk_50kHz_pulse;
 
 reg [7:0] cur_duty_l1,cur_duty_l2,cur_duty_l3,cur_duty_r1,cur_duty_r2,cur_duty_r3;//Duty Cycle of Servos  ->  Current State
 reg [7:0] nxt_duty_l1,nxt_duty_l2,nxt_duty_l3,nxt_duty_r1,nxt_duty_r2,nxt_duty_r3;//Duty Cycle of Servos  ->  Next State from Action Group
@@ -55,26 +55,26 @@ parameter AddrInit = 9'd0,
     AddrTurnRight = 9'd20;
     
 
-clock_100kHz ins_clk_100kHz(
+clock_100MHz ins_clk_100MHz(
 .clk(clk),
 .rst_n(rst_n),
-.out_100kHz(clk_100kHz)
+.out_100MHz(clk_100MHz)
 );
 
-clock_50Hz ins_clk_50Hz(
+clock_50kHz ins_clk_50kHz(
 .clk(clk),
 .rst_n(rst_n),
-.out_50Hz(clk_50Hz),
-.out_50Hz_pulse(clk_50Hz_pulse)
+.out_50kHz(clk_50kHz),
+.out_50kHz_pulse(clk_50kHz_pulse)
 );
 
 //Servo PWM driver module
-pwm pwm_l1(.clk(clk_100kHz),.rst(clk_50Hz_pulse),.pwm_duty(cur_duty_l1),.pwm_offset(offset_l1),.pwm_out(out_pwm_l1));
-pwm pwm_l2(.clk(clk_100kHz),.rst(clk_50Hz_pulse),.pwm_duty(cur_duty_l2),.pwm_offset(offset_l2),.pwm_out(out_pwm_l2));
-pwm pwm_l3(.clk(clk_100kHz),.rst(clk_50Hz_pulse),.pwm_duty(cur_duty_l3),.pwm_offset(offset_l3),.pwm_out(out_pwm_l3));
-pwm pwm_r1(.clk(clk_100kHz),.rst(clk_50Hz_pulse),.pwm_duty(cur_duty_r1),.pwm_offset(offset_r1),.pwm_out(out_pwm_r1));
-pwm pwm_r2(.clk(clk_100kHz),.rst(clk_50Hz_pulse),.pwm_duty(cur_duty_r2),.pwm_offset(offset_r2),.pwm_out(out_pwm_r2));
-pwm pwm_r3(.clk(clk_100kHz),.rst(clk_50Hz_pulse),.pwm_duty(cur_duty_r3),.pwm_offset(offset_r3),.pwm_out(out_pwm_r3)); 
+pwm pwm_l1(.clk(clk_100MHz),.rst(clk_50kHz_pulse),.pwm_duty(cur_duty_l1),.pwm_offset(offset_l1),.pwm_out(out_pwm_l1));
+pwm pwm_l2(.clk(clk_100MHz),.rst(clk_50kHz_pulse),.pwm_duty(cur_duty_l2),.pwm_offset(offset_l2),.pwm_out(out_pwm_l2));
+pwm pwm_l3(.clk(clk_100MHz),.rst(clk_50kHz_pulse),.pwm_duty(cur_duty_l3),.pwm_offset(offset_l3),.pwm_out(out_pwm_l3));
+pwm pwm_r1(.clk(clk_100MHz),.rst(clk_50kHz_pulse),.pwm_duty(cur_duty_r1),.pwm_offset(offset_r1),.pwm_out(out_pwm_r1));
+pwm pwm_r2(.clk(clk_100MHz),.rst(clk_50kHz_pulse),.pwm_duty(cur_duty_r2),.pwm_offset(offset_r2),.pwm_out(out_pwm_r2));
+pwm pwm_r3(.clk(clk_100MHz),.rst(clk_50kHz_pulse),.pwm_duty(cur_duty_r3),.pwm_offset(offset_r3),.pwm_out(out_pwm_r3)); 
 
 reg [11:0] writeAddr;
 reg [7:0]  writeData;
@@ -89,7 +89,7 @@ ActionGroupMem ins_ActionGroupMem(
 .dina(writeData),//[7:0]
 //Port B reader
 .clkb(clk),
-.enb(clk_50Hz),
+.enb(clk_50kHz),
 .addrb(readMemAddr),//[8:0]
 .doutb(memBuffer)//[63:0],{takeTime,Null,nxt_duty_l1,nxt_duty_l2,nxt_duty_l3,nxt_duty_r1,nxt_duty_r2,nxt_duty_r3}
 );
@@ -104,6 +104,10 @@ begin
     writeData <= 8'd0;
     writeAddr <= 12'd0;
     curActionGroup <= AddrMoveForword;
+    runLoopFlag <= 1;    //If you need to cycle the action group,this flag should be set as 1
+    run1StepFlag <= 0;   //Run action group step by step.
+    isRunningFlag <= 1;  //
+    setOffsetFlag <= 0;
 end
 
 reg [7:0] offsetState;
@@ -120,7 +124,7 @@ else begin
 end
 
 //Update Servo State(cur_pwm <= nxt_pwm)
-always @ ( posedge clk_50Hz_pulse or negedge rst_n )//Driven variable:cur_duty_xx
+always @ ( posedge clk_50kHz_pulse or negedge rst_n )//Driven variable:cur_duty_xx
 if(!rst_n) begin
     {cur_duty_l1,cur_duty_l2,cur_duty_l3,cur_duty_r1,cur_duty_r2,cur_duty_r3} <= {6{8'd150}};
 end
@@ -153,7 +157,7 @@ end
 else begin
     case(state)
         Sbegin: begin
-            if ( clk_50Hz_pulse ) begin
+            if ( clk_50kHz_pulse ) begin
                 readMemAddr <= curActionGroup;
                 state <= SreadMem;
             end
@@ -166,7 +170,7 @@ else begin
             state <= Swait4Action;
         end
         Swait4Action: begin
-            if ( clk_50Hz_pulse ) begin
+            if ( clk_50kHz_pulse ) begin
                 if ( leftTimes > 0 ) begin //this action is not finished
                     leftTimes <= leftTimes - 1;
                     state <= Swait4Action;
@@ -217,4 +221,60 @@ else begin
     endcase
 end
 
+endmodule
+
+module clock_100MHz(clk,rst_n,out_100MHz);
+    
+input clk,rst_n;
+output reg out_100MHz;
+    
+reg [15:0] counter;
+    
+always @ (posedge clk or negedge rst_n)
+    if (!rst_n)
+        begin
+            out_100MHz <= 0;
+            counter <= 0;
+        end
+    else
+        if (counter == 16'd499) //clk=100MHz
+            begin
+                out_100MHz <= !out_100MHz;
+                counter <= 0;
+            end
+        else 
+            begin
+                out_100MHz <= out_100MHz;
+                counter <= counter + 1;
+            end
+            
+endmodule
+
+module clock_50kHz(clk,rst_n,out_50kHz,out_50kHz_pulse);
+
+input clk,rst_n;
+output reg out_50kHz,out_50kHz_pulse;
+
+reg [31:0] counter;
+
+always @ (posedge clk or negedge rst_n)
+    if (!rst_n) begin
+        out_50kHz_pulse <= 0;
+        out_50kHz <= 0;
+        counter <= 0;
+    end
+    else begin   //clk=100MHz
+        if (counter >= 32'd1_999) begin
+            counter <= 0;
+            out_50kHz_pulse <= 1;
+            out_50kHz <= 1;
+        end
+        else begin
+            if (counter < 32'd1_000)        out_50kHz <= 1;
+            else if (counter < 32'd2_000)   out_50kHz <= 0;
+            counter <= counter + 1;
+            out_50kHz_pulse <= 0;
+        end
+    end
+        
 endmodule

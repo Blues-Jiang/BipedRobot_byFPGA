@@ -25,17 +25,23 @@ set_property  -dict { PACKAGE_PIN R10 IOSTANDARD LVCMOS33 } [get_ports rst_n];
 #set_property -dict { PACKAGE_PIN C15 IOSTANDARD LVCMOS33 } [get_ports {data[7]}];
 
 ## 3-Pins Output for PWM
-## EES-327 The upper row
 set_property -dict { PACKAGE_PIN U3 IOSTANDARD LVCMOS33 } [get_ports out_pwm_l3]; #An_J27
 set_property -dict { PACKAGE_PIN R6 IOSTANDARD LVCMOS33 } [get_ports out_pwm_l2]; #An_J28
 set_property -dict { PACKAGE_PIN P5 IOSTANDARD LVCMOS33 } [get_ports out_pwm_l1]; #An_J29
-#set_property -dict { PACKAGE_PIN P2 IOSTANDARD LVCMOS33 } [get_ports An_J30]; #An_J30
-#set_property -dict { PACKAGE_PIN N1 IOSTANDARD LVCMOS33 } [get_ports An_J31]; #An_J31
-#set_property -dict { PACKAGE_PIN M6 IOSTANDARD LVCMOS33 } [get_ports An_J32]; #An_J32
-#set_property -dict { PACKAGE_PIN G1 IOSTANDARD LVCMOS33 } [get_ports An_J33]; #An_J33
 set_property -dict { PACKAGE_PIN N4 IOSTANDARD LVCMOS33 } [get_ports out_pwm_r1]; #An_J34
 set_property -dict { PACKAGE_PIN P3 IOSTANDARD LVCMOS33 } [get_ports out_pwm_r2]; #An_J35
 set_property -dict { PACKAGE_PIN K6 IOSTANDARD LVCMOS33 } [get_ports out_pwm_r3]; #An_J36
+## EES-327 The upper row
+#set_property -dict { PACKAGE_PIN U3 IOSTANDARD LVCMOS33 } [get_ports out_pwm_l3]; #An_J27
+#set_property -dict { PACKAGE_PIN R6 IOSTANDARD LVCMOS33 } [get_ports out_pwm_l2]; #An_J28
+#set_property -dict { PACKAGE_PIN P5 IOSTANDARD LVCMOS33 } [get_ports out_pwm_l1]; #An_J29
+##set_property -dict { PACKAGE_PIN P2 IOSTANDARD LVCMOS33 } [get_ports An_J30]; #An_J30
+##set_property -dict { PACKAGE_PIN N1 IOSTANDARD LVCMOS33 } [get_ports An_J31]; #An_J31
+##set_property -dict { PACKAGE_PIN M6 IOSTANDARD LVCMOS33 } [get_ports An_J32]; #An_J32
+##set_property -dict { PACKAGE_PIN G1 IOSTANDARD LVCMOS33 } [get_ports An_J33]; #An_J33
+#set_property -dict { PACKAGE_PIN N4 IOSTANDARD LVCMOS33 } [get_ports out_pwm_r1]; #An_J34
+#set_property -dict { PACKAGE_PIN P3 IOSTANDARD LVCMOS33 } [get_ports out_pwm_r2]; #An_J35
+#set_property -dict { PACKAGE_PIN K6 IOSTANDARD LVCMOS33 } [get_ports out_pwm_r3]; #An_J36
 ## EES-327 The lower row
 #set_property -dict { PACKAGE_PIN R16 IOSTANDARD LVCMOS33 } [get_ports An_J12]; #An_J12
 #set_property -dict { PACKAGE_PIN T10 IOSTANDARD LVCMOS33 } [get_ports An_J11]; #An_J11
@@ -49,11 +55,11 @@ set_property -dict { PACKAGE_PIN K6 IOSTANDARD LVCMOS33 } [get_ports out_pwm_r3]
 #set_property -dict { PACKAGE_PIN P18 IOSTANDARD LVCMOS33 } [get_ports An_J19]; #An_J19
 
 #LED List
-#set_property -dict { PACKAGE_PIN D10 IOSTANDARD LVCMOS33 } [get_ports {LED[0]}];
-#set_property -dict { PACKAGE_PIN D9 IOSTANDARD LVCMOS33 } [get_ports {LED[1]}];
-#set_property -dict { PACKAGE_PIN C9 IOSTANDARD LVCMOS33 } [get_ports {LED[2]}];
-#set_property -dict { PACKAGE_PIN B9 IOSTANDARD LVCMOS33 } [get_ports {LED[3]}];
-#set_property -dict { PACKAGE_PIN B8 IOSTANDARD LVCMOS33 } [get_ports {LED[4]}];
-#set_property -dict { PACKAGE_PIN A8 IOSTANDARD LVCMOS33 } [get_ports {LED[5]}];
-#set_property -dict { PACKAGE_PIN C11 IOSTANDARD LVCMOS33 } [get_ports {LED[6]}];
-#set_property -dict { PACKAGE_PIN C10 IOSTANDARD LVCMOS33 } [get_ports {LED[7]}];
+set_property -dict { PACKAGE_PIN D10 IOSTANDARD LVCMOS33 } [get_ports {LED[0]}];
+set_property -dict { PACKAGE_PIN D9 IOSTANDARD LVCMOS33 } [get_ports {LED[1]}];
+set_property -dict { PACKAGE_PIN C9 IOSTANDARD LVCMOS33 } [get_ports {LED[2]}];
+set_property -dict { PACKAGE_PIN B9 IOSTANDARD LVCMOS33 } [get_ports {LED[3]}];
+set_property -dict { PACKAGE_PIN B8 IOSTANDARD LVCMOS33 } [get_ports {LED[4]}];
+set_property -dict { PACKAGE_PIN A8 IOSTANDARD LVCMOS33 } [get_ports {LED[5]}];
+set_property -dict { PACKAGE_PIN C11 IOSTANDARD LVCMOS33 } [get_ports {LED[6]}];
+set_property -dict { PACKAGE_PIN C10 IOSTANDARD LVCMOS33 } [get_ports {LED[7]}];
