@@ -1,0 +1,26 @@
+#-----------------------------------------------------------
+# Vivado v2015.4 (64-bit)
+# SW Build 1412921 on Wed Nov 18 09:43:45 MST 2015
+# IP Build 1412160 on Tue Nov 17 13:47:24 MST 2015
+# Start of session at: Tue Jul 04 17:12:24 2017
+# Process ID: 4472
+# Current directory: D:/Design_Project/E_elements/Project_BipedRobot
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent18344 D:\Design_Project\E_elements\Project_BipedRobot\Project_BipedRobot.xpr
+# Log file: D:/Design_Project/E_elements/Project_BipedRobot/vivado.log
+# Journal file: D:/Design_Project/E_elements/Project_BipedRobot\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project D:/Design_Project/E_elements/Project_BipedRobot/Project_BipedRobot.xpr
+open_hw
+reset_run impl_1
+launch_runs impl_1 -to_step write_bitstream -jobs 2
+connect_hw_server
+open_hw_target
+current_hw_device [lindex [get_hw_devices] 0]
+refresh_hw_device -update_hw_probes false [lindex [get_hw_devices] 0]
+reset_run impl_1
+launch_runs impl_1 -jobs 2
+reset_run synth_1
+launch_runs synth_1 -jobs 2
+wait_on_run synth_1
+launch_runs impl_1 -jobs 2

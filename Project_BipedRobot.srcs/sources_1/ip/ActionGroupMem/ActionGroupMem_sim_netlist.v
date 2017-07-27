@@ -1,7 +1,7 @@
-// Copyright 1986-2015 Xilinx, Inc. All Rights Reserved.
+// Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
-// Tool Version: Vivado v.2015.4 (win64) Build 1412921 Wed Nov 18 09:43:45 MST 2015
-// Date        : Thu Jul 20 17:39:32 2017
+// Tool Version: Vivado v.2017.1 (win64) Build 1846317 Fri Apr 14 18:55:03 MDT 2017
+// Date        : Thu Jul 27 16:04:20 2017
 // Host        : ACER-BLUES running 64-bit major release  (build 9200)
 // Command     : write_verilog -force -mode funcsim
 //               D:/Design_Project/E_elements/Project_BipedRobot/Project_BipedRobot.srcs/sources_1/ip/ActionGroupMem/ActionGroupMem_sim_netlist.v
@@ -12,8 +12,7 @@
 // --------------------------------------------------------------------------------
 `timescale 1 ps / 1 ps
 
-(* CHECK_LICENSE_TYPE = "ActionGroupMem,blk_mem_gen_v8_3_1,{}" *) (* core_generation_info = "ActionGroupMem,blk_mem_gen_v8_3_1,{x_ipProduct=Vivado 2015.4,x_ipVendor=xilinx.com,x_ipLibrary=ip,x_ipName=blk_mem_gen,x_ipVersion=8.3,x_ipCoreRevision=1,x_ipLanguage=VERILOG,x_ipSimLanguage=MIXED,C_FAMILY=artix7,C_XDEVICEFAMILY=artix7,C_ELABORATION_DIR=./,C_INTERFACE_TYPE=0,C_AXI_TYPE=1,C_AXI_SLAVE_TYPE=0,C_USE_BRAM_BLOCK=0,C_ENABLE_32BIT_ADDRESS=0,C_CTRL_ECC_ALGO=NONE,C_HAS_AXI_ID=0,C_AXI_ID_WIDTH=4,C_MEM_TYPE=1,C_BYTE_SIZE=9,C_ALGORITHM=1,C_PRIM_TYPE=1,C_LOAD_INIT_FILE=1,C_INIT_FILE_NAME=ActionGroupMem.mif,C_INIT_FILE=ActionGroupMem.mem,C_USE_DEFAULT_DATA=1,C_DEFAULT_DATA=0,C_HAS_RSTA=0,C_RST_PRIORITY_A=CE,C_RSTRAM_A=0,C_INITA_VAL=0,C_HAS_ENA=1,C_HAS_REGCEA=0,C_USE_BYTE_WEA=0,C_WEA_WIDTH=1,C_WRITE_MODE_A=NO_CHANGE,C_WRITE_WIDTH_A=8,C_READ_WIDTH_A=8,C_WRITE_DEPTH_A=4000,C_READ_DEPTH_A=4000,C_ADDRA_WIDTH=12,C_HAS_RSTB=0,C_RST_PRIORITY_B=CE,C_RSTRAM_B=0,C_INITB_VAL=0,C_HAS_ENB=1,C_HAS_REGCEB=0,C_USE_BYTE_WEB=0,C_WEB_WIDTH=1,C_WRITE_MODE_B=WRITE_FIRST,C_WRITE_WIDTH_B=64,C_READ_WIDTH_B=64,C_WRITE_DEPTH_B=500,C_READ_DEPTH_B=500,C_ADDRB_WIDTH=9,C_HAS_MEM_OUTPUT_REGS_A=0,C_HAS_MEM_OUTPUT_REGS_B=1,C_HAS_MUX_OUTPUT_REGS_A=0,C_HAS_MUX_OUTPUT_REGS_B=0,C_MUX_PIPELINE_STAGES=0,C_HAS_SOFTECC_INPUT_REGS_A=0,C_HAS_SOFTECC_OUTPUT_REGS_B=0,C_USE_SOFTECC=0,C_USE_ECC=0,C_EN_ECC_PIPE=0,C_HAS_INJECTERR=0,C_SIM_COLLISION_CHECK=ALL,C_COMMON_CLK=0,C_DISABLE_WARN_BHV_COLL=0,C_EN_SLEEP_PIN=0,C_USE_URAM=0,C_EN_RDADDRA_CHG=0,C_EN_RDADDRB_CHG=0,C_EN_DEEPSLEEP_PIN=0,C_EN_SHUTDOWN_PIN=0,C_EN_SAFETY_CKT=0,C_DISABLE_WARN_BHV_RANGE=0,C_COUNT_36K_BRAM=1,C_COUNT_18K_BRAM=0,C_EST_POWER_SUMMARY=Estimated Power for IP     _     4.4085 mW}" *) (* downgradeipidentifiedwarnings = "yes" *) 
-(* x_core_info = "blk_mem_gen_v8_3_1,Vivado 2015.4" *) 
+(* CHECK_LICENSE_TYPE = "ActionGroupMem,blk_mem_gen_v8_3_6,{}" *) (* downgradeipidentifiedwarnings = "yes" *) (* x_core_info = "blk_mem_gen_v8_3_6,Vivado 2017.1" *) 
 (* NotValidForBitStream *)
 module ActionGroupMem
    (clka,
@@ -138,9 +137,8 @@ module ActionGroupMem
   (* C_WRITE_WIDTH_A = "8" *) 
   (* C_WRITE_WIDTH_B = "64" *) 
   (* C_XDEVICEFAMILY = "artix7" *) 
-  (* DONT_TOUCH *) 
   (* downgradeipidentifiedwarnings = "yes" *) 
-  ActionGroupMem_blk_mem_gen_v8_3_1 U0
+  ActionGroupMem_blk_mem_gen_v8_3_6 U0
        (.addra(addra),
         .addrb(addrb),
         .clka(clka),
@@ -337,7 +335,6 @@ module ActionGroupMem_blk_mem_gen_prim_wrapper_init
   wire [7:0]\NLW_DEVICE_7SERIES.NO_BMM_INFO.SDP.WIDE_PRIM36_sp.ram_ECCPARITY_UNCONNECTED ;
   wire [8:0]\NLW_DEVICE_7SERIES.NO_BMM_INFO.SDP.WIDE_PRIM36_sp.ram_RDADDRECC_UNCONNECTED ;
 
-  (* CLOCK_DOMAINS = "INDEPENDENT" *) 
   (* box_type = "PRIMITIVE" *) 
   RAMB36E1 #(
     .DOA_REG(1),
@@ -360,9 +357,9 @@ module ActionGroupMem_blk_mem_gen_prim_wrapper_init
     .INITP_0D(256'h0000000000000000000000000000000000000000000000000000000000000000),
     .INITP_0E(256'h0000000000000000000000000000000000000000000000000000000000000000),
     .INITP_0F(256'h0000000000000000000000000000000000000000000000000000000000000000),
-    .INIT_00(256'h96969664649B100A96AFA57D7D96100AA0C8B496969612079696969696960300),
-    .INIT_01(256'hCDC891969696100AAFAF96967D87100A9696968C647810079696966E55821006),
-    .INIT_02(256'h78739696AFA5200A9696969BB9AF2007969696C3D7A52206BED7AA9696961106),
+    .INIT_00(256'hCDC891969696100AAFAF96967D87100A9696968C647812079696969696960300),
+    .INIT_01(256'h96969664649B100A96AFA57D7D96100AA0C8B49696961007BED7AA9696961006),
+    .INIT_02(256'h78739696AFA5200A9696969BB9AF2007969696C3D7A522069696966E55821106),
     .INIT_03(256'h967D87B4B496200A96737D9696962007695587969696200664699B969696200A),
     .INIT_04(256'h9696969696963107A5968CA0968C300A969696875F7D320D969696CDC891210A),
     .INIT_05(256'h9696969696964109B9CDA59696964009C3C396A0968C4005A5968CA0968C4207),
@@ -617,8 +614,8 @@ endmodule
 (* C_USE_URAM = "0" *) (* C_WEA_WIDTH = "1" *) (* C_WEB_WIDTH = "1" *) 
 (* C_WRITE_DEPTH_A = "4000" *) (* C_WRITE_DEPTH_B = "500" *) (* C_WRITE_MODE_A = "NO_CHANGE" *) 
 (* C_WRITE_MODE_B = "WRITE_FIRST" *) (* C_WRITE_WIDTH_A = "8" *) (* C_WRITE_WIDTH_B = "64" *) 
-(* C_XDEVICEFAMILY = "artix7" *) (* ORIG_REF_NAME = "blk_mem_gen_v8_3_1" *) (* downgradeipidentifiedwarnings = "yes" *) 
-module ActionGroupMem_blk_mem_gen_v8_3_1
+(* C_XDEVICEFAMILY = "artix7" *) (* ORIG_REF_NAME = "blk_mem_gen_v8_3_6" *) (* downgradeipidentifiedwarnings = "yes" *) 
+module ActionGroupMem_blk_mem_gen_v8_3_6
    (clka,
     rsta,
     ena,
@@ -752,42 +749,10 @@ module ActionGroupMem_blk_mem_gen_v8_3_1
   wire clka;
   wire clkb;
   wire [7:0]dina;
-  wire [63:0]dinb;
   wire [63:0]doutb;
-  wire eccpipece;
   wire ena;
   wire enb;
-  wire injectdbiterr;
-  wire injectsbiterr;
-  wire regcea;
-  wire regceb;
-  wire rsta;
-  wire rstb;
-  wire s_aclk;
-  wire s_aresetn;
-  wire [31:0]s_axi_araddr;
-  wire [1:0]s_axi_arburst;
-  wire [3:0]s_axi_arid;
-  wire [7:0]s_axi_arlen;
-  wire [2:0]s_axi_arsize;
-  wire s_axi_arvalid;
-  wire [31:0]s_axi_awaddr;
-  wire [1:0]s_axi_awburst;
-  wire [3:0]s_axi_awid;
-  wire [7:0]s_axi_awlen;
-  wire [2:0]s_axi_awsize;
-  wire s_axi_awvalid;
-  wire s_axi_bready;
-  wire s_axi_injectdbiterr;
-  wire s_axi_injectsbiterr;
-  wire s_axi_rready;
-  wire [7:0]s_axi_wdata;
-  wire s_axi_wlast;
-  wire [0:0]s_axi_wstrb;
-  wire s_axi_wvalid;
-  wire sleep;
   wire [0:0]wea;
-  wire [0:0]web;
 
   assign dbiterr = \<const0> ;
   assign douta[7] = \<const0> ;
@@ -905,7 +870,7 @@ module ActionGroupMem_blk_mem_gen_v8_3_1
   assign sbiterr = \<const0> ;
   GND GND
        (.G(\<const0> ));
-  ActionGroupMem_blk_mem_gen_v8_3_1_synth inst_blk_mem_gen
+  ActionGroupMem_blk_mem_gen_v8_3_6_synth inst_blk_mem_gen
        (.addra(addra),
         .addrb(addrb),
         .clka(clka),
@@ -917,8 +882,8 @@ module ActionGroupMem_blk_mem_gen_v8_3_1
         .wea(wea));
 endmodule
 
-(* ORIG_REF_NAME = "blk_mem_gen_v8_3_1_synth" *) 
-module ActionGroupMem_blk_mem_gen_v8_3_1_synth
+(* ORIG_REF_NAME = "blk_mem_gen_v8_3_6_synth" *) 
+module ActionGroupMem_blk_mem_gen_v8_3_6_synth
    (doutb,
     clkb,
     clka,
@@ -948,7 +913,7 @@ module ActionGroupMem_blk_mem_gen_v8_3_1_synth
   wire enb;
   wire [0:0]wea;
 
-  ActionGroupMem_blk_mem_gen_top \gnativebmg.native_blk_mem_gen 
+  ActionGroupMem_blk_mem_gen_top \gnbram.gnativebmg.native_blk_mem_gen 
        (.addra(addra),
         .addrb(addrb),
         .clka(clka),
@@ -1009,8 +974,8 @@ module glbl ();
     reg JTAG_USER_TDO3_GLBL = 1'bz;
     reg JTAG_USER_TDO4_GLBL = 1'bz;
 
-    assign (weak1, weak0) GSR = GSR_int;
-    assign (weak1, weak0) GTS = GTS_int;
+    assign (strong1, weak0) GSR = GSR_int;
+    assign (strong1, weak0) GTS = GTS_int;
     assign (weak1, weak0) PRLD = PRLD_int;
 
     initial begin

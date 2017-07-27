@@ -1,16 +1,27 @@
 vlib work
 vlib msim
 
-vlib msim/blk_mem_gen_v8_3_1
 vlib msim/xil_defaultlib
+vlib msim/xpm
+vlib msim/blk_mem_gen_v8_3_6
 
-vmap blk_mem_gen_v8_3_1 msim/blk_mem_gen_v8_3_1
 vmap xil_defaultlib msim/xil_defaultlib
+vmap xpm msim/xpm
+vmap blk_mem_gen_v8_3_6 msim/blk_mem_gen_v8_3_6
 
-vcom -work blk_mem_gen_v8_3_1 -64 -93 \
-"../../../ipstatic/blk_mem_gen_v8_3_1/simulation/blk_mem_gen_v8_3.vhd" \
+vlog -work xil_defaultlib -64 -incr -sv \
+"D:/App_Installed/Xilinx/Vivado/2017.1/data/ip/xpm/xpm_cdc/hdl/xpm_cdc.sv" \
+"D:/App_Installed/Xilinx/Vivado/2017.1/data/ip/xpm/xpm_memory/hdl/xpm_memory.sv" \
 
-vcom -work xil_defaultlib -64 -93 \
-"../../../../Project_BipedRobot.srcs/sources_1/ip/ActionGroupMem/sim/ActionGroupMem.vhd" \
+vcom -work xpm -64 -93 \
+"D:/App_Installed/Xilinx/Vivado/2017.1/data/ip/xpm/xpm_VCOMP.vhd" \
 
+vlog -work blk_mem_gen_v8_3_6 -64 -incr \
+"../../../ipstatic/simulation/blk_mem_gen_v8_3.v" \
+
+vlog -work xil_defaultlib -64 -incr \
+"../../../../Project_BipedRobot.srcs/sources_1/ip/ActionGroupMem/sim/ActionGroupMem.v" \
+
+vlog -work xil_defaultlib \
+"glbl.v"
 

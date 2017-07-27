@@ -20,7 +20,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module data_in(clk,rst_n,sw,btn,DIPsw,isRunningFlag,runLoopFlag,run1StepFlag);
+module data_in(clk,rst_n,sw,btn,DIPsw,isRunningFlag,runLoopFlag,run1StepFlag,resetFlag);
 input clk,rst_n;
 input sw;
 input [4:0] btn;
@@ -30,15 +30,18 @@ input [3:0] DIPsw;
 output wire isRunningFlag;
 output wire runLoopFlag;
 output wire run1StepFlag;
+output wire resetFlag;
 //output wire setOffsetFlag;
 
-wire runLoopFlag_n,run1StepFlag_n;
+wire runLoopFlag_n,run1StepFlag_n,resetFlag_n;
 assign runLoopFlag = ~runLoopFlag_n;
 assign run1StepFlag = ~run1StepFlag_n;
+assign resetFlag = ~resetFlag_n;
 
 btn2btn sw_isRunning(.clk(clk),.rst_n(rst_n),.din(sw),.flag(isRunningFlag));
 btn2sw  btn_runLoop(.clk(clk),.rst_n(rst_n),.din(btn[0]),.flag(runLoopFlag_n));
 btn2btn  btn_run1Step(.clk(clk),.rst_n(rst_n),.din(btn[1]),.flag(run1StepFlag_n));
+btn2btn  btn_reset(.clk(clk),.rst_n(rst_n),.din(btn[4]),.flag(resetFlag_n));
 //btn2sw btn_setOffset(.clk(clk),.rst_n(rst_n),.din(sw),.flag(!setOffsetFlag));
 
 endmodule

@@ -1,7 +1,7 @@
--- Copyright 1986-2015 Xilinx, Inc. All Rights Reserved.
+-- Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
--- Tool Version: Vivado v.2015.4 (win64) Build 1412921 Wed Nov 18 09:43:45 MST 2015
--- Date        : Thu Jul 20 17:39:32 2017
+-- Tool Version: Vivado v.2017.1 (win64) Build 1846317 Fri Apr 14 18:55:03 MDT 2017
+-- Date        : Thu Jul 27 16:04:20 2017
 -- Host        : ACER-BLUES running 64-bit major release  (build 9200)
 -- Command     : write_vhdl -force -mode funcsim
 --               D:/Design_Project/E_elements/Project_BipedRobot/Project_BipedRobot.srcs/sources_1/ip/ActionGroupMem/ActionGroupMem_sim_netlist.vhdl
@@ -45,8 +45,6 @@ architecture STRUCTURE of ActionGroupMem_blk_mem_gen_prim_wrapper_init is
   signal \NLW_DEVICE_7SERIES.NO_BMM_INFO.SDP.WIDE_PRIM36_sp.ram_SBITERR_UNCONNECTED\ : STD_LOGIC;
   signal \NLW_DEVICE_7SERIES.NO_BMM_INFO.SDP.WIDE_PRIM36_sp.ram_ECCPARITY_UNCONNECTED\ : STD_LOGIC_VECTOR ( 7 downto 0 );
   signal \NLW_DEVICE_7SERIES.NO_BMM_INFO.SDP.WIDE_PRIM36_sp.ram_RDADDRECC_UNCONNECTED\ : STD_LOGIC_VECTOR ( 8 downto 0 );
-  attribute CLOCK_DOMAINS : string;
-  attribute CLOCK_DOMAINS of \DEVICE_7SERIES.NO_BMM_INFO.SDP.WIDE_PRIM36_sp.ram\ : label is "INDEPENDENT";
   attribute box_type : string;
   attribute box_type of \DEVICE_7SERIES.NO_BMM_INFO.SDP.WIDE_PRIM36_sp.ram\ : label is "PRIMITIVE";
 begin
@@ -72,9 +70,9 @@ begin
       INITP_0D => X"0000000000000000000000000000000000000000000000000000000000000000",
       INITP_0E => X"0000000000000000000000000000000000000000000000000000000000000000",
       INITP_0F => X"0000000000000000000000000000000000000000000000000000000000000000",
-      INIT_00 => X"96969664649B100A96AFA57D7D96100AA0C8B496969612079696969696960300",
-      INIT_01 => X"CDC891969696100AAFAF96967D87100A9696968C647810079696966E55821006",
-      INIT_02 => X"78739696AFA5200A9696969BB9AF2007969696C3D7A52206BED7AA9696961106",
+      INIT_00 => X"CDC891969696100AAFAF96967D87100A9696968C647812079696969696960300",
+      INIT_01 => X"96969664649B100A96AFA57D7D96100AA0C8B49696961007BED7AA9696961006",
+      INIT_02 => X"78739696AFA5200A9696969BB9AF2007969696C3D7A522069696966E55821106",
       INIT_03 => X"967D87B4B496200A96737D9696962007695587969696200664699B969696200A",
       INIT_04 => X"9696969696963107A5968CA0968C300A969696875F7D320D969696CDC891210A",
       INIT_05 => X"9696969696964109B9CDA59696964009C3C396A0968C4005A5968CA0968C4207",
@@ -390,7 +388,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity ActionGroupMem_blk_mem_gen_v8_3_1_synth is
+entity ActionGroupMem_blk_mem_gen_v8_3_6_synth is
   port (
     doutb : out STD_LOGIC_VECTOR ( 63 downto 0 );
     clkb : in STD_LOGIC;
@@ -403,12 +401,12 @@ entity ActionGroupMem_blk_mem_gen_v8_3_1_synth is
     wea : in STD_LOGIC_VECTOR ( 0 to 0 )
   );
   attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of ActionGroupMem_blk_mem_gen_v8_3_1_synth : entity is "blk_mem_gen_v8_3_1_synth";
-end ActionGroupMem_blk_mem_gen_v8_3_1_synth;
+  attribute ORIG_REF_NAME of ActionGroupMem_blk_mem_gen_v8_3_6_synth : entity is "blk_mem_gen_v8_3_6_synth";
+end ActionGroupMem_blk_mem_gen_v8_3_6_synth;
 
-architecture STRUCTURE of ActionGroupMem_blk_mem_gen_v8_3_1_synth is
+architecture STRUCTURE of ActionGroupMem_blk_mem_gen_v8_3_6_synth is
 begin
-\gnativebmg.native_blk_mem_gen\: entity work.ActionGroupMem_blk_mem_gen_top
+\gnbram.gnativebmg.native_blk_mem_gen\: entity work.ActionGroupMem_blk_mem_gen_top
      port map (
       addra(11 downto 0) => addra(11 downto 0),
       addrb(8 downto 0) => addrb(8 downto 0),
@@ -425,7 +423,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity ActionGroupMem_blk_mem_gen_v8_3_1 is
+entity ActionGroupMem_blk_mem_gen_v8_3_6 is
   port (
     clka : in STD_LOGIC;
     rsta : in STD_LOGIC;
@@ -492,158 +490,158 @@ entity ActionGroupMem_blk_mem_gen_v8_3_1 is
     s_axi_rdaddrecc : out STD_LOGIC_VECTOR ( 8 downto 0 )
   );
   attribute C_ADDRA_WIDTH : integer;
-  attribute C_ADDRA_WIDTH of ActionGroupMem_blk_mem_gen_v8_3_1 : entity is 12;
+  attribute C_ADDRA_WIDTH of ActionGroupMem_blk_mem_gen_v8_3_6 : entity is 12;
   attribute C_ADDRB_WIDTH : integer;
-  attribute C_ADDRB_WIDTH of ActionGroupMem_blk_mem_gen_v8_3_1 : entity is 9;
+  attribute C_ADDRB_WIDTH of ActionGroupMem_blk_mem_gen_v8_3_6 : entity is 9;
   attribute C_ALGORITHM : integer;
-  attribute C_ALGORITHM of ActionGroupMem_blk_mem_gen_v8_3_1 : entity is 1;
+  attribute C_ALGORITHM of ActionGroupMem_blk_mem_gen_v8_3_6 : entity is 1;
   attribute C_AXI_ID_WIDTH : integer;
-  attribute C_AXI_ID_WIDTH of ActionGroupMem_blk_mem_gen_v8_3_1 : entity is 4;
+  attribute C_AXI_ID_WIDTH of ActionGroupMem_blk_mem_gen_v8_3_6 : entity is 4;
   attribute C_AXI_SLAVE_TYPE : integer;
-  attribute C_AXI_SLAVE_TYPE of ActionGroupMem_blk_mem_gen_v8_3_1 : entity is 0;
+  attribute C_AXI_SLAVE_TYPE of ActionGroupMem_blk_mem_gen_v8_3_6 : entity is 0;
   attribute C_AXI_TYPE : integer;
-  attribute C_AXI_TYPE of ActionGroupMem_blk_mem_gen_v8_3_1 : entity is 1;
+  attribute C_AXI_TYPE of ActionGroupMem_blk_mem_gen_v8_3_6 : entity is 1;
   attribute C_BYTE_SIZE : integer;
-  attribute C_BYTE_SIZE of ActionGroupMem_blk_mem_gen_v8_3_1 : entity is 9;
+  attribute C_BYTE_SIZE of ActionGroupMem_blk_mem_gen_v8_3_6 : entity is 9;
   attribute C_COMMON_CLK : integer;
-  attribute C_COMMON_CLK of ActionGroupMem_blk_mem_gen_v8_3_1 : entity is 0;
+  attribute C_COMMON_CLK of ActionGroupMem_blk_mem_gen_v8_3_6 : entity is 0;
   attribute C_COUNT_18K_BRAM : string;
-  attribute C_COUNT_18K_BRAM of ActionGroupMem_blk_mem_gen_v8_3_1 : entity is "0";
+  attribute C_COUNT_18K_BRAM of ActionGroupMem_blk_mem_gen_v8_3_6 : entity is "0";
   attribute C_COUNT_36K_BRAM : string;
-  attribute C_COUNT_36K_BRAM of ActionGroupMem_blk_mem_gen_v8_3_1 : entity is "1";
+  attribute C_COUNT_36K_BRAM of ActionGroupMem_blk_mem_gen_v8_3_6 : entity is "1";
   attribute C_CTRL_ECC_ALGO : string;
-  attribute C_CTRL_ECC_ALGO of ActionGroupMem_blk_mem_gen_v8_3_1 : entity is "NONE";
+  attribute C_CTRL_ECC_ALGO of ActionGroupMem_blk_mem_gen_v8_3_6 : entity is "NONE";
   attribute C_DEFAULT_DATA : string;
-  attribute C_DEFAULT_DATA of ActionGroupMem_blk_mem_gen_v8_3_1 : entity is "0";
+  attribute C_DEFAULT_DATA of ActionGroupMem_blk_mem_gen_v8_3_6 : entity is "0";
   attribute C_DISABLE_WARN_BHV_COLL : integer;
-  attribute C_DISABLE_WARN_BHV_COLL of ActionGroupMem_blk_mem_gen_v8_3_1 : entity is 0;
+  attribute C_DISABLE_WARN_BHV_COLL of ActionGroupMem_blk_mem_gen_v8_3_6 : entity is 0;
   attribute C_DISABLE_WARN_BHV_RANGE : integer;
-  attribute C_DISABLE_WARN_BHV_RANGE of ActionGroupMem_blk_mem_gen_v8_3_1 : entity is 0;
+  attribute C_DISABLE_WARN_BHV_RANGE of ActionGroupMem_blk_mem_gen_v8_3_6 : entity is 0;
   attribute C_ELABORATION_DIR : string;
-  attribute C_ELABORATION_DIR of ActionGroupMem_blk_mem_gen_v8_3_1 : entity is "./";
+  attribute C_ELABORATION_DIR of ActionGroupMem_blk_mem_gen_v8_3_6 : entity is "./";
   attribute C_ENABLE_32BIT_ADDRESS : integer;
-  attribute C_ENABLE_32BIT_ADDRESS of ActionGroupMem_blk_mem_gen_v8_3_1 : entity is 0;
+  attribute C_ENABLE_32BIT_ADDRESS of ActionGroupMem_blk_mem_gen_v8_3_6 : entity is 0;
   attribute C_EN_DEEPSLEEP_PIN : integer;
-  attribute C_EN_DEEPSLEEP_PIN of ActionGroupMem_blk_mem_gen_v8_3_1 : entity is 0;
+  attribute C_EN_DEEPSLEEP_PIN of ActionGroupMem_blk_mem_gen_v8_3_6 : entity is 0;
   attribute C_EN_ECC_PIPE : integer;
-  attribute C_EN_ECC_PIPE of ActionGroupMem_blk_mem_gen_v8_3_1 : entity is 0;
+  attribute C_EN_ECC_PIPE of ActionGroupMem_blk_mem_gen_v8_3_6 : entity is 0;
   attribute C_EN_RDADDRA_CHG : integer;
-  attribute C_EN_RDADDRA_CHG of ActionGroupMem_blk_mem_gen_v8_3_1 : entity is 0;
+  attribute C_EN_RDADDRA_CHG of ActionGroupMem_blk_mem_gen_v8_3_6 : entity is 0;
   attribute C_EN_RDADDRB_CHG : integer;
-  attribute C_EN_RDADDRB_CHG of ActionGroupMem_blk_mem_gen_v8_3_1 : entity is 0;
+  attribute C_EN_RDADDRB_CHG of ActionGroupMem_blk_mem_gen_v8_3_6 : entity is 0;
   attribute C_EN_SAFETY_CKT : integer;
-  attribute C_EN_SAFETY_CKT of ActionGroupMem_blk_mem_gen_v8_3_1 : entity is 0;
+  attribute C_EN_SAFETY_CKT of ActionGroupMem_blk_mem_gen_v8_3_6 : entity is 0;
   attribute C_EN_SHUTDOWN_PIN : integer;
-  attribute C_EN_SHUTDOWN_PIN of ActionGroupMem_blk_mem_gen_v8_3_1 : entity is 0;
+  attribute C_EN_SHUTDOWN_PIN of ActionGroupMem_blk_mem_gen_v8_3_6 : entity is 0;
   attribute C_EN_SLEEP_PIN : integer;
-  attribute C_EN_SLEEP_PIN of ActionGroupMem_blk_mem_gen_v8_3_1 : entity is 0;
+  attribute C_EN_SLEEP_PIN of ActionGroupMem_blk_mem_gen_v8_3_6 : entity is 0;
   attribute C_EST_POWER_SUMMARY : string;
-  attribute C_EST_POWER_SUMMARY of ActionGroupMem_blk_mem_gen_v8_3_1 : entity is "Estimated Power for IP     :     4.4085 mW";
+  attribute C_EST_POWER_SUMMARY of ActionGroupMem_blk_mem_gen_v8_3_6 : entity is "Estimated Power for IP     :     4.4085 mW";
   attribute C_FAMILY : string;
-  attribute C_FAMILY of ActionGroupMem_blk_mem_gen_v8_3_1 : entity is "artix7";
+  attribute C_FAMILY of ActionGroupMem_blk_mem_gen_v8_3_6 : entity is "artix7";
   attribute C_HAS_AXI_ID : integer;
-  attribute C_HAS_AXI_ID of ActionGroupMem_blk_mem_gen_v8_3_1 : entity is 0;
+  attribute C_HAS_AXI_ID of ActionGroupMem_blk_mem_gen_v8_3_6 : entity is 0;
   attribute C_HAS_ENA : integer;
-  attribute C_HAS_ENA of ActionGroupMem_blk_mem_gen_v8_3_1 : entity is 1;
+  attribute C_HAS_ENA of ActionGroupMem_blk_mem_gen_v8_3_6 : entity is 1;
   attribute C_HAS_ENB : integer;
-  attribute C_HAS_ENB of ActionGroupMem_blk_mem_gen_v8_3_1 : entity is 1;
+  attribute C_HAS_ENB of ActionGroupMem_blk_mem_gen_v8_3_6 : entity is 1;
   attribute C_HAS_INJECTERR : integer;
-  attribute C_HAS_INJECTERR of ActionGroupMem_blk_mem_gen_v8_3_1 : entity is 0;
+  attribute C_HAS_INJECTERR of ActionGroupMem_blk_mem_gen_v8_3_6 : entity is 0;
   attribute C_HAS_MEM_OUTPUT_REGS_A : integer;
-  attribute C_HAS_MEM_OUTPUT_REGS_A of ActionGroupMem_blk_mem_gen_v8_3_1 : entity is 0;
+  attribute C_HAS_MEM_OUTPUT_REGS_A of ActionGroupMem_blk_mem_gen_v8_3_6 : entity is 0;
   attribute C_HAS_MEM_OUTPUT_REGS_B : integer;
-  attribute C_HAS_MEM_OUTPUT_REGS_B of ActionGroupMem_blk_mem_gen_v8_3_1 : entity is 1;
+  attribute C_HAS_MEM_OUTPUT_REGS_B of ActionGroupMem_blk_mem_gen_v8_3_6 : entity is 1;
   attribute C_HAS_MUX_OUTPUT_REGS_A : integer;
-  attribute C_HAS_MUX_OUTPUT_REGS_A of ActionGroupMem_blk_mem_gen_v8_3_1 : entity is 0;
+  attribute C_HAS_MUX_OUTPUT_REGS_A of ActionGroupMem_blk_mem_gen_v8_3_6 : entity is 0;
   attribute C_HAS_MUX_OUTPUT_REGS_B : integer;
-  attribute C_HAS_MUX_OUTPUT_REGS_B of ActionGroupMem_blk_mem_gen_v8_3_1 : entity is 0;
+  attribute C_HAS_MUX_OUTPUT_REGS_B of ActionGroupMem_blk_mem_gen_v8_3_6 : entity is 0;
   attribute C_HAS_REGCEA : integer;
-  attribute C_HAS_REGCEA of ActionGroupMem_blk_mem_gen_v8_3_1 : entity is 0;
+  attribute C_HAS_REGCEA of ActionGroupMem_blk_mem_gen_v8_3_6 : entity is 0;
   attribute C_HAS_REGCEB : integer;
-  attribute C_HAS_REGCEB of ActionGroupMem_blk_mem_gen_v8_3_1 : entity is 0;
+  attribute C_HAS_REGCEB of ActionGroupMem_blk_mem_gen_v8_3_6 : entity is 0;
   attribute C_HAS_RSTA : integer;
-  attribute C_HAS_RSTA of ActionGroupMem_blk_mem_gen_v8_3_1 : entity is 0;
+  attribute C_HAS_RSTA of ActionGroupMem_blk_mem_gen_v8_3_6 : entity is 0;
   attribute C_HAS_RSTB : integer;
-  attribute C_HAS_RSTB of ActionGroupMem_blk_mem_gen_v8_3_1 : entity is 0;
+  attribute C_HAS_RSTB of ActionGroupMem_blk_mem_gen_v8_3_6 : entity is 0;
   attribute C_HAS_SOFTECC_INPUT_REGS_A : integer;
-  attribute C_HAS_SOFTECC_INPUT_REGS_A of ActionGroupMem_blk_mem_gen_v8_3_1 : entity is 0;
+  attribute C_HAS_SOFTECC_INPUT_REGS_A of ActionGroupMem_blk_mem_gen_v8_3_6 : entity is 0;
   attribute C_HAS_SOFTECC_OUTPUT_REGS_B : integer;
-  attribute C_HAS_SOFTECC_OUTPUT_REGS_B of ActionGroupMem_blk_mem_gen_v8_3_1 : entity is 0;
+  attribute C_HAS_SOFTECC_OUTPUT_REGS_B of ActionGroupMem_blk_mem_gen_v8_3_6 : entity is 0;
   attribute C_INITA_VAL : string;
-  attribute C_INITA_VAL of ActionGroupMem_blk_mem_gen_v8_3_1 : entity is "0";
+  attribute C_INITA_VAL of ActionGroupMem_blk_mem_gen_v8_3_6 : entity is "0";
   attribute C_INITB_VAL : string;
-  attribute C_INITB_VAL of ActionGroupMem_blk_mem_gen_v8_3_1 : entity is "0";
+  attribute C_INITB_VAL of ActionGroupMem_blk_mem_gen_v8_3_6 : entity is "0";
   attribute C_INIT_FILE : string;
-  attribute C_INIT_FILE of ActionGroupMem_blk_mem_gen_v8_3_1 : entity is "ActionGroupMem.mem";
+  attribute C_INIT_FILE of ActionGroupMem_blk_mem_gen_v8_3_6 : entity is "ActionGroupMem.mem";
   attribute C_INIT_FILE_NAME : string;
-  attribute C_INIT_FILE_NAME of ActionGroupMem_blk_mem_gen_v8_3_1 : entity is "ActionGroupMem.mif";
+  attribute C_INIT_FILE_NAME of ActionGroupMem_blk_mem_gen_v8_3_6 : entity is "ActionGroupMem.mif";
   attribute C_INTERFACE_TYPE : integer;
-  attribute C_INTERFACE_TYPE of ActionGroupMem_blk_mem_gen_v8_3_1 : entity is 0;
+  attribute C_INTERFACE_TYPE of ActionGroupMem_blk_mem_gen_v8_3_6 : entity is 0;
   attribute C_LOAD_INIT_FILE : integer;
-  attribute C_LOAD_INIT_FILE of ActionGroupMem_blk_mem_gen_v8_3_1 : entity is 1;
+  attribute C_LOAD_INIT_FILE of ActionGroupMem_blk_mem_gen_v8_3_6 : entity is 1;
   attribute C_MEM_TYPE : integer;
-  attribute C_MEM_TYPE of ActionGroupMem_blk_mem_gen_v8_3_1 : entity is 1;
+  attribute C_MEM_TYPE of ActionGroupMem_blk_mem_gen_v8_3_6 : entity is 1;
   attribute C_MUX_PIPELINE_STAGES : integer;
-  attribute C_MUX_PIPELINE_STAGES of ActionGroupMem_blk_mem_gen_v8_3_1 : entity is 0;
+  attribute C_MUX_PIPELINE_STAGES of ActionGroupMem_blk_mem_gen_v8_3_6 : entity is 0;
   attribute C_PRIM_TYPE : integer;
-  attribute C_PRIM_TYPE of ActionGroupMem_blk_mem_gen_v8_3_1 : entity is 1;
+  attribute C_PRIM_TYPE of ActionGroupMem_blk_mem_gen_v8_3_6 : entity is 1;
   attribute C_READ_DEPTH_A : integer;
-  attribute C_READ_DEPTH_A of ActionGroupMem_blk_mem_gen_v8_3_1 : entity is 4000;
+  attribute C_READ_DEPTH_A of ActionGroupMem_blk_mem_gen_v8_3_6 : entity is 4000;
   attribute C_READ_DEPTH_B : integer;
-  attribute C_READ_DEPTH_B of ActionGroupMem_blk_mem_gen_v8_3_1 : entity is 500;
+  attribute C_READ_DEPTH_B of ActionGroupMem_blk_mem_gen_v8_3_6 : entity is 500;
   attribute C_READ_WIDTH_A : integer;
-  attribute C_READ_WIDTH_A of ActionGroupMem_blk_mem_gen_v8_3_1 : entity is 8;
+  attribute C_READ_WIDTH_A of ActionGroupMem_blk_mem_gen_v8_3_6 : entity is 8;
   attribute C_READ_WIDTH_B : integer;
-  attribute C_READ_WIDTH_B of ActionGroupMem_blk_mem_gen_v8_3_1 : entity is 64;
+  attribute C_READ_WIDTH_B of ActionGroupMem_blk_mem_gen_v8_3_6 : entity is 64;
   attribute C_RSTRAM_A : integer;
-  attribute C_RSTRAM_A of ActionGroupMem_blk_mem_gen_v8_3_1 : entity is 0;
+  attribute C_RSTRAM_A of ActionGroupMem_blk_mem_gen_v8_3_6 : entity is 0;
   attribute C_RSTRAM_B : integer;
-  attribute C_RSTRAM_B of ActionGroupMem_blk_mem_gen_v8_3_1 : entity is 0;
+  attribute C_RSTRAM_B of ActionGroupMem_blk_mem_gen_v8_3_6 : entity is 0;
   attribute C_RST_PRIORITY_A : string;
-  attribute C_RST_PRIORITY_A of ActionGroupMem_blk_mem_gen_v8_3_1 : entity is "CE";
+  attribute C_RST_PRIORITY_A of ActionGroupMem_blk_mem_gen_v8_3_6 : entity is "CE";
   attribute C_RST_PRIORITY_B : string;
-  attribute C_RST_PRIORITY_B of ActionGroupMem_blk_mem_gen_v8_3_1 : entity is "CE";
+  attribute C_RST_PRIORITY_B of ActionGroupMem_blk_mem_gen_v8_3_6 : entity is "CE";
   attribute C_SIM_COLLISION_CHECK : string;
-  attribute C_SIM_COLLISION_CHECK of ActionGroupMem_blk_mem_gen_v8_3_1 : entity is "ALL";
+  attribute C_SIM_COLLISION_CHECK of ActionGroupMem_blk_mem_gen_v8_3_6 : entity is "ALL";
   attribute C_USE_BRAM_BLOCK : integer;
-  attribute C_USE_BRAM_BLOCK of ActionGroupMem_blk_mem_gen_v8_3_1 : entity is 0;
+  attribute C_USE_BRAM_BLOCK of ActionGroupMem_blk_mem_gen_v8_3_6 : entity is 0;
   attribute C_USE_BYTE_WEA : integer;
-  attribute C_USE_BYTE_WEA of ActionGroupMem_blk_mem_gen_v8_3_1 : entity is 0;
+  attribute C_USE_BYTE_WEA of ActionGroupMem_blk_mem_gen_v8_3_6 : entity is 0;
   attribute C_USE_BYTE_WEB : integer;
-  attribute C_USE_BYTE_WEB of ActionGroupMem_blk_mem_gen_v8_3_1 : entity is 0;
+  attribute C_USE_BYTE_WEB of ActionGroupMem_blk_mem_gen_v8_3_6 : entity is 0;
   attribute C_USE_DEFAULT_DATA : integer;
-  attribute C_USE_DEFAULT_DATA of ActionGroupMem_blk_mem_gen_v8_3_1 : entity is 1;
+  attribute C_USE_DEFAULT_DATA of ActionGroupMem_blk_mem_gen_v8_3_6 : entity is 1;
   attribute C_USE_ECC : integer;
-  attribute C_USE_ECC of ActionGroupMem_blk_mem_gen_v8_3_1 : entity is 0;
+  attribute C_USE_ECC of ActionGroupMem_blk_mem_gen_v8_3_6 : entity is 0;
   attribute C_USE_SOFTECC : integer;
-  attribute C_USE_SOFTECC of ActionGroupMem_blk_mem_gen_v8_3_1 : entity is 0;
+  attribute C_USE_SOFTECC of ActionGroupMem_blk_mem_gen_v8_3_6 : entity is 0;
   attribute C_USE_URAM : integer;
-  attribute C_USE_URAM of ActionGroupMem_blk_mem_gen_v8_3_1 : entity is 0;
+  attribute C_USE_URAM of ActionGroupMem_blk_mem_gen_v8_3_6 : entity is 0;
   attribute C_WEA_WIDTH : integer;
-  attribute C_WEA_WIDTH of ActionGroupMem_blk_mem_gen_v8_3_1 : entity is 1;
+  attribute C_WEA_WIDTH of ActionGroupMem_blk_mem_gen_v8_3_6 : entity is 1;
   attribute C_WEB_WIDTH : integer;
-  attribute C_WEB_WIDTH of ActionGroupMem_blk_mem_gen_v8_3_1 : entity is 1;
+  attribute C_WEB_WIDTH of ActionGroupMem_blk_mem_gen_v8_3_6 : entity is 1;
   attribute C_WRITE_DEPTH_A : integer;
-  attribute C_WRITE_DEPTH_A of ActionGroupMem_blk_mem_gen_v8_3_1 : entity is 4000;
+  attribute C_WRITE_DEPTH_A of ActionGroupMem_blk_mem_gen_v8_3_6 : entity is 4000;
   attribute C_WRITE_DEPTH_B : integer;
-  attribute C_WRITE_DEPTH_B of ActionGroupMem_blk_mem_gen_v8_3_1 : entity is 500;
+  attribute C_WRITE_DEPTH_B of ActionGroupMem_blk_mem_gen_v8_3_6 : entity is 500;
   attribute C_WRITE_MODE_A : string;
-  attribute C_WRITE_MODE_A of ActionGroupMem_blk_mem_gen_v8_3_1 : entity is "NO_CHANGE";
+  attribute C_WRITE_MODE_A of ActionGroupMem_blk_mem_gen_v8_3_6 : entity is "NO_CHANGE";
   attribute C_WRITE_MODE_B : string;
-  attribute C_WRITE_MODE_B of ActionGroupMem_blk_mem_gen_v8_3_1 : entity is "WRITE_FIRST";
+  attribute C_WRITE_MODE_B of ActionGroupMem_blk_mem_gen_v8_3_6 : entity is "WRITE_FIRST";
   attribute C_WRITE_WIDTH_A : integer;
-  attribute C_WRITE_WIDTH_A of ActionGroupMem_blk_mem_gen_v8_3_1 : entity is 8;
+  attribute C_WRITE_WIDTH_A of ActionGroupMem_blk_mem_gen_v8_3_6 : entity is 8;
   attribute C_WRITE_WIDTH_B : integer;
-  attribute C_WRITE_WIDTH_B of ActionGroupMem_blk_mem_gen_v8_3_1 : entity is 64;
+  attribute C_WRITE_WIDTH_B of ActionGroupMem_blk_mem_gen_v8_3_6 : entity is 64;
   attribute C_XDEVICEFAMILY : string;
-  attribute C_XDEVICEFAMILY of ActionGroupMem_blk_mem_gen_v8_3_1 : entity is "artix7";
+  attribute C_XDEVICEFAMILY of ActionGroupMem_blk_mem_gen_v8_3_6 : entity is "artix7";
   attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of ActionGroupMem_blk_mem_gen_v8_3_1 : entity is "blk_mem_gen_v8_3_1";
+  attribute ORIG_REF_NAME of ActionGroupMem_blk_mem_gen_v8_3_6 : entity is "blk_mem_gen_v8_3_6";
   attribute downgradeipidentifiedwarnings : string;
-  attribute downgradeipidentifiedwarnings of ActionGroupMem_blk_mem_gen_v8_3_1 : entity is "yes";
-end ActionGroupMem_blk_mem_gen_v8_3_1;
+  attribute downgradeipidentifiedwarnings of ActionGroupMem_blk_mem_gen_v8_3_6 : entity is "yes";
+end ActionGroupMem_blk_mem_gen_v8_3_6;
 
-architecture STRUCTURE of ActionGroupMem_blk_mem_gen_v8_3_1 is
+architecture STRUCTURE of ActionGroupMem_blk_mem_gen_v8_3_6 is
   signal \<const0>\ : STD_LOGIC;
 begin
   dbiterr <= \<const0>\;
@@ -764,7 +762,7 @@ GND: unisim.vcomponents.GND
      port map (
       G => \<const0>\
     );
-inst_blk_mem_gen: entity work.ActionGroupMem_blk_mem_gen_v8_3_1_synth
+inst_blk_mem_gen: entity work.ActionGroupMem_blk_mem_gen_v8_3_6_synth
      port map (
       addra(11 downto 0) => addra(11 downto 0),
       addrb(8 downto 0) => addrb(8 downto 0),
@@ -796,13 +794,11 @@ entity ActionGroupMem is
   attribute NotValidForBitStream : boolean;
   attribute NotValidForBitStream of ActionGroupMem : entity is true;
   attribute CHECK_LICENSE_TYPE : string;
-  attribute CHECK_LICENSE_TYPE of ActionGroupMem : entity is "ActionGroupMem,blk_mem_gen_v8_3_1,{}";
-  attribute core_generation_info : string;
-  attribute core_generation_info of ActionGroupMem : entity is "ActionGroupMem,blk_mem_gen_v8_3_1,{x_ipProduct=Vivado 2015.4,x_ipVendor=xilinx.com,x_ipLibrary=ip,x_ipName=blk_mem_gen,x_ipVersion=8.3,x_ipCoreRevision=1,x_ipLanguage=VERILOG,x_ipSimLanguage=MIXED,C_FAMILY=artix7,C_XDEVICEFAMILY=artix7,C_ELABORATION_DIR=./,C_INTERFACE_TYPE=0,C_AXI_TYPE=1,C_AXI_SLAVE_TYPE=0,C_USE_BRAM_BLOCK=0,C_ENABLE_32BIT_ADDRESS=0,C_CTRL_ECC_ALGO=NONE,C_HAS_AXI_ID=0,C_AXI_ID_WIDTH=4,C_MEM_TYPE=1,C_BYTE_SIZE=9,C_ALGORITHM=1,C_PRIM_TYPE=1,C_LOAD_INIT_FILE=1,C_INIT_FILE_NAME=ActionGroupMem.mif,C_INIT_FILE=ActionGroupMem.mem,C_USE_DEFAULT_DATA=1,C_DEFAULT_DATA=0,C_HAS_RSTA=0,C_RST_PRIORITY_A=CE,C_RSTRAM_A=0,C_INITA_VAL=0,C_HAS_ENA=1,C_HAS_REGCEA=0,C_USE_BYTE_WEA=0,C_WEA_WIDTH=1,C_WRITE_MODE_A=NO_CHANGE,C_WRITE_WIDTH_A=8,C_READ_WIDTH_A=8,C_WRITE_DEPTH_A=4000,C_READ_DEPTH_A=4000,C_ADDRA_WIDTH=12,C_HAS_RSTB=0,C_RST_PRIORITY_B=CE,C_RSTRAM_B=0,C_INITB_VAL=0,C_HAS_ENB=1,C_HAS_REGCEB=0,C_USE_BYTE_WEB=0,C_WEB_WIDTH=1,C_WRITE_MODE_B=WRITE_FIRST,C_WRITE_WIDTH_B=64,C_READ_WIDTH_B=64,C_WRITE_DEPTH_B=500,C_READ_DEPTH_B=500,C_ADDRB_WIDTH=9,C_HAS_MEM_OUTPUT_REGS_A=0,C_HAS_MEM_OUTPUT_REGS_B=1,C_HAS_MUX_OUTPUT_REGS_A=0,C_HAS_MUX_OUTPUT_REGS_B=0,C_MUX_PIPELINE_STAGES=0,C_HAS_SOFTECC_INPUT_REGS_A=0,C_HAS_SOFTECC_OUTPUT_REGS_B=0,C_USE_SOFTECC=0,C_USE_ECC=0,C_EN_ECC_PIPE=0,C_HAS_INJECTERR=0,C_SIM_COLLISION_CHECK=ALL,C_COMMON_CLK=0,C_DISABLE_WARN_BHV_COLL=0,C_EN_SLEEP_PIN=0,C_USE_URAM=0,C_EN_RDADDRA_CHG=0,C_EN_RDADDRB_CHG=0,C_EN_DEEPSLEEP_PIN=0,C_EN_SHUTDOWN_PIN=0,C_EN_SAFETY_CKT=0,C_DISABLE_WARN_BHV_RANGE=0,C_COUNT_36K_BRAM=1,C_COUNT_18K_BRAM=0,C_EST_POWER_SUMMARY=Estimated Power for IP     _     4.4085 mW}";
+  attribute CHECK_LICENSE_TYPE of ActionGroupMem : entity is "ActionGroupMem,blk_mem_gen_v8_3_6,{}";
   attribute downgradeipidentifiedwarnings : string;
   attribute downgradeipidentifiedwarnings of ActionGroupMem : entity is "yes";
   attribute x_core_info : string;
-  attribute x_core_info of ActionGroupMem : entity is "blk_mem_gen_v8_3_1,Vivado 2015.4";
+  attribute x_core_info of ActionGroupMem : entity is "blk_mem_gen_v8_3_6,Vivado 2017.1";
 end ActionGroupMem;
 
 architecture STRUCTURE of ActionGroupMem is
@@ -972,11 +968,9 @@ architecture STRUCTURE of ActionGroupMem is
   attribute C_WRITE_WIDTH_B of U0 : label is 64;
   attribute C_XDEVICEFAMILY : string;
   attribute C_XDEVICEFAMILY of U0 : label is "artix7";
-  attribute DONT_TOUCH : boolean;
-  attribute DONT_TOUCH of U0 : label is std.standard.true;
   attribute downgradeipidentifiedwarnings of U0 : label is "yes";
 begin
-U0: entity work.ActionGroupMem_blk_mem_gen_v8_3_1
+U0: entity work.ActionGroupMem_blk_mem_gen_v8_3_6
      port map (
       addra(11 downto 0) => addra(11 downto 0),
       addrb(8 downto 0) => addrb(8 downto 0),

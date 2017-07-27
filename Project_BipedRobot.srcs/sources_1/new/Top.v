@@ -37,24 +37,26 @@ input [3:0] DIPsw;
 output wire out_pwm_l1,out_pwm_l2,out_pwm_l3,out_pwm_r1,out_pwm_r2,out_pwm_r3;
 output wire [7:0] LED;
 
-wire isRunningFlag,runLoopFlag,run1StepFlag;
+wire isRunningFlag,runLoopFlag,run1StepFlag,resetFlag;
 //wire setOffsetFlag;
 
 //Bluetooth Module
-/*UART_top Bluetooth(
-.clk(clk),
-.rst_n(rst_n),
-.RS232_rx(RS232_rx),
-.RS232_tx(RS232_tx)
-);*/
+//UART_top Bluetooth(
+//.clk(clk),
+//.rst_n(rst_n),
+//.RS232_rx(RS232_rx),
+//.RS232_tx(RS232_tx)
+//);
 
 assign LED[0] = isRunningFlag;
-assign LED[1] = runLoopFlag;
-assign LED[2] = run1StepFlag;
+assign LED[1] = resetFlag;
+assign LED[2] = runLoopFlag;
+assign LED[3] = run1StepFlag;
 
 pwm_ctrl ins_pwm_ctrl(
 .clk(clk),
 .rst_n(rst_n),
+.resetFlag(resetFlag),
 .isRunningFlag(isRunningFlag),
 .runLoopFlag(runLoopFlag),
 .run1StepFlag(run1StepFlag),
@@ -72,10 +74,24 @@ data_in ins_dataIn(
 .sw(sw),
 .btn(btn),
 .DIPsw(DIPsw),
+.resetFlag(resetFlag),
 .isRunningFlag(isRunningFlag),
 .runLoopFlag(runLoopFlag),
 .run1StepFlag(run1StepFlag)
 //.setOffsetFlag(setOffsetFlag)
 );
+
+//    reg en_forward;      //前进使能
+//    reg en_back;         //后退使能
+//    reg en_keepdistance;  //保持距离使能
+//    reg en_welcome;      //欢迎使能
+//    reg en_kick;         //踢腿运动 
+//    reg en_slide;         //滑步运动
+    
+//    reg [32:0]count=0;  //计数器1用来 
+//    reg flag=0;   //位数切换标志
+//    reg out_of_distance=0;   //距离过远标志
+//    reg in_distance=0;       //距离过近标志
+
 
 endmodule

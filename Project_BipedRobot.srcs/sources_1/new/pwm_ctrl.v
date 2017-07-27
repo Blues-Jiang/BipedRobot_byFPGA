@@ -20,7 +20,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module pwm_ctrl(clk,rst_n,isRunningFlag,runLoopFlag,run1StepFlag,setOffsetFlag,out_pwm_l1,out_pwm_l2,out_pwm_l3,out_pwm_r1,out_pwm_r2,out_pwm_r3);
+module pwm_ctrl(clk,rst_n,isRunningFlag,runLoopFlag,run1StepFlag,setOffsetFlag,resetFlag,out_pwm_l1,out_pwm_l2,out_pwm_l3,out_pwm_r1,out_pwm_r2,out_pwm_r3);
 input clk,rst_n;
 //input [7:0] data;
 output wire out_pwm_l1,out_pwm_l2,out_pwm_l3,out_pwm_r1,out_pwm_r2,out_pwm_r3;//PWM Signal to drive Servos
@@ -31,8 +31,9 @@ input runLoopFlag;    //If you need to cycle the action group,this flag should b
 input run1StepFlag;   //Run action group step by step.
 input isRunningFlag;  //
 input setOffsetFlag;
+input resetFlag;
 
-wire clk_100kHz,clk_50Hz,clk_50Hz_pulse;
+wire clk_100kHz,clk_50Hz,clk_50Hz_pulse,clk_50Hz_pulse_jitter;
 
 reg [7:0] cur_duty_l1,cur_duty_l2,cur_duty_l3,cur_duty_r1,cur_duty_r2,cur_duty_r3;//Duty Cycle of Servos  ->  Current State
 reg [7:0] nxt_duty_l1,nxt_duty_l2,nxt_duty_l3,nxt_duty_r1,nxt_duty_r2,nxt_duty_r3;//Duty Cycle of Servos  ->  Next State from Action Group
@@ -65,7 +66,8 @@ clock_50Hz ins_clk_50Hz(
 .clk(clk),
 .rst_n(rst_n),
 .out_50Hz(clk_50Hz),
-.out_50Hz_pulse(clk_50Hz_pulse)
+.out_50Hz_pulse(clk_50Hz_pulse),
+.out_50Hz_pulse_jitter(clk_50Hz_pulse_jitter)
 );
 
 //Servo PWM driver module
@@ -78,6 +80,7 @@ pwm pwm_r3(.clk(clk_100kHz),.rst(clk_50Hz_pulse),.pwm_duty(cur_duty_r3),.pwm_off
 
 reg [11:0] writeAddr;
 reg [7:0]  writeData;
+reg memEn;
 
 //Menery of Action Group
 ActionGroupMem ins_ActionGroupMem(
@@ -89,14 +92,14 @@ ActionGroupMem ins_ActionGroupMem(
 .dina(writeData),//[7:0]
 //Port B reader
 .clkb(clk),
-.enb(clk_50Hz),
+.enb(memEn),
 .addrb(readMemAddr),//[8:0]
 .doutb(memBuffer)//[63:0],{takeTime,Null,nxt_duty_l1,nxt_duty_l2,nxt_duty_l3,nxt_duty_r1,nxt_duty_r2,nxt_duty_r3}
 );
 
 reg [7:0] counter;
 reg [7:0] state;
-parameter Sbegin=8'd0,SreadMem=8'd1,Swait4Action=8'd2,SupdateAddr=8'd3,Swait4continue=8'd4,Sreset=8'hfe,Sstop=8'hff;
+parameter Sbegin=8'd0,SreadMem=8'd1,Swait4Action=8'd2,SupdateAddr=8'd3,Swait4continue=8'd4,Sbuffer1=8'd5,Sbuffer2=8'd6,Sreset=8'hfe,Sstop=8'hff;
 
 //Reset other signal
 always @ ( negedge rst_n )
@@ -113,34 +116,37 @@ always @ (posedge clk or negedge rst_n )
 if(!rst_n) begin
     {offset_l1,offset_l2,offset_l3,offset_r1,offset_r2,offset_r3} <= {6{8'd150}};
 end
-else begin
-    if(!isRunningFlag) begin
+//else begin
+//    if(!isRunningFlag) begin
         
-    end
-end
+//    end
+//end
 
 //Update Servo State(cur_pwm <= nxt_pwm)
-always @ ( posedge clk_50Hz_pulse or negedge rst_n )//Driven variable:cur_duty_xx
-if(!rst_n) begin
-    {cur_duty_l1,cur_duty_l2,cur_duty_l3,cur_duty_r1,cur_duty_r2,cur_duty_r3} <= {6{8'd150}};
-end
-else begin
-    if      (cur_duty_l1 <= (nxt_duty_l1+SPEED) && cur_duty_l1 >= (nxt_duty_l1-SPEED)) cur_duty_l1 <= nxt_duty_l1;
+always @ ( posedge clk_50Hz_pulse )//Driven variable:cur_duty_xx
+begin
+    if      (nxt_duty_l1 > 250 || nxt_duty_l1 < 50) cur_duty_l1 <= cur_duty_l1;
+    else if (cur_duty_l1 <= (nxt_duty_l1+SPEED) && cur_duty_l1 >= (nxt_duty_l1-SPEED)) cur_duty_l1 <= nxt_duty_l1;
     else if (cur_duty_l1 > nxt_duty_l1) cur_duty_l1 <= cur_duty_l1 - SPEED;
     else if (cur_duty_l1 < nxt_duty_l1) cur_duty_l1 <= cur_duty_l1 + SPEED;
-    if      (cur_duty_l2 <= (nxt_duty_l2+SPEED) && cur_duty_l2 >= (nxt_duty_l2-SPEED)) cur_duty_l2 <= nxt_duty_l2;
+    if      (nxt_duty_l2 > 250 || nxt_duty_l2 < 50) cur_duty_l2 <= cur_duty_l2;
+    else if (cur_duty_l2 <= (nxt_duty_l2+SPEED) && cur_duty_l2 >= (nxt_duty_l2-SPEED)) cur_duty_l2 <= nxt_duty_l2;
     else if (cur_duty_l2 > nxt_duty_l2) cur_duty_l2 <= cur_duty_l2 - SPEED;
     else if (cur_duty_l2 < nxt_duty_l2) cur_duty_l2 <= cur_duty_l2 + SPEED;
-    if      (cur_duty_l3 <= (nxt_duty_l3+SPEED) && cur_duty_l3 >= (nxt_duty_l3-SPEED)) cur_duty_l3 <= nxt_duty_l3;
+    if      (nxt_duty_l3 > 250 || nxt_duty_l3 < 50) cur_duty_l3 <= cur_duty_l3;
+    else if (cur_duty_l3 <= (nxt_duty_l3+SPEED) && cur_duty_l3 >= (nxt_duty_l3-SPEED)) cur_duty_l3 <= nxt_duty_l3;
     else if (cur_duty_l3 > nxt_duty_l3) cur_duty_l3 <= cur_duty_l3 - SPEED;
     else if (cur_duty_l3 < nxt_duty_l3) cur_duty_l3 <= cur_duty_l3 + SPEED;
-    if      (cur_duty_r1 <= (nxt_duty_r1+SPEED) && cur_duty_r1 >= (nxt_duty_r1-SPEED)) cur_duty_r1 <= nxt_duty_r1;
+    if      (nxt_duty_r1 > 250 || nxt_duty_r1 < 50) cur_duty_r1 <= cur_duty_r1;
+    else if (cur_duty_r1 <= (nxt_duty_r1+SPEED) && cur_duty_r1 >= (nxt_duty_r1-SPEED)) cur_duty_r1 <= nxt_duty_r1;
     else if (cur_duty_r1 > nxt_duty_r1) cur_duty_r1 <= cur_duty_r1 - SPEED;
     else if (cur_duty_r1 < nxt_duty_r1) cur_duty_r1 <= cur_duty_r1 + SPEED;
-    if      (cur_duty_r2 <= (nxt_duty_r2+SPEED) && cur_duty_r2 >= (nxt_duty_r2-SPEED)) cur_duty_r2 <= nxt_duty_r2;
+    if      (nxt_duty_r2 > 250 || nxt_duty_r2 < 50) cur_duty_r2 <= cur_duty_r2;
+    else if (cur_duty_r2 <= (nxt_duty_r2+SPEED) && cur_duty_r2 >= (nxt_duty_r2-SPEED)) cur_duty_r2 <= nxt_duty_r2;
     else if (cur_duty_r2 > nxt_duty_r2) cur_duty_r2 <= cur_duty_r2 - SPEED;
     else if (cur_duty_r2 < nxt_duty_r2) cur_duty_r2 <= cur_duty_r2 + SPEED;
-    if      (cur_duty_r3 <= (nxt_duty_r3+SPEED) && cur_duty_r3 >= (nxt_duty_r3-SPEED)) cur_duty_r3 <= nxt_duty_r3;
+    if      (nxt_duty_r3 > 250 || nxt_duty_r3 < 50) cur_duty_r3 <= cur_duty_r3;
+    else if (cur_duty_r3 <= (nxt_duty_r3+SPEED) && cur_duty_r3 >= (nxt_duty_r3-SPEED)) cur_duty_r3 <= nxt_duty_r3;
     else if (cur_duty_r3 > nxt_duty_r3) cur_duty_r3 <= cur_duty_r3 - SPEED;
     else if (cur_duty_r3 < nxt_duty_r3) cur_duty_r3 <= cur_duty_r3 + SPEED;
 end
@@ -148,21 +154,27 @@ end
 //Main FSM,read Memory of Action Group,
 always @ ( posedge clk or negedge rst_n )//Driven variable:nxt_duty_xx,takeTime,Addr of memory
 if(!rst_n) begin
-    state <= Sbegin;
+    state <= Sstop;
+    memEn <= 0;
 end
 else begin
     case(state)
         Sbegin: begin
             if ( clk_50Hz_pulse ) begin
+                memEn <= 1;
                 readMemAddr <= curActionGroup;
-                state <= SreadMem;
+                state <= Sbuffer1;
             end
             else state <= Sbegin;
         end
         //SupdateAddr
+        Sbuffer1: begin
+            state <= SreadMem;
+        end
         SreadMem: begin
             //{leftTimes,ActionGroupNo,NC,lastAction,nxt_duty_l1,nxt_duty_l2,nxt_duty_l3,nxt_duty_r1,nxt_duty_r2,nxt_duty_r3} <= memBuffer; //this memory seq is not sequential
             {nxt_duty_r3,nxt_duty_r2,nxt_duty_r1,nxt_duty_l3,nxt_duty_l2,nxt_duty_l1,ActionGroupNo,NC,firstAction,lastAction,leftTimes} <= memBuffer;
+            memEn <= 0;
             state <= Swait4Action;
         end
         Swait4Action: begin
@@ -172,6 +184,7 @@ else begin
                     state <= Swait4Action;
                 end
                 else begin // leftTimes == 0,this action is finished
+                    memEn <= 1;
                     state <= SupdateAddr;
                 end
             end
@@ -182,23 +195,27 @@ else begin
             else begin
                 if (lastAction) begin
                     readMemAddr <= curActionGroup;
-                    state <= Swait4continue;
+                    state <= Sbuffer2;
                 end
                 else begin
                     readMemAddr <= readMemAddr + 1;
-                    state <= Swait4continue;
+                    state <= Sbuffer2;
                 end
             end
         end
+        Sbuffer2: begin
+            state <= Swait4continue;
+        end
         Swait4continue: begin
-            if (runLoopFlag)            state <= SreadMem;
+            if (runLoopFlag)        state <= SreadMem;
             else if (run1StepFlag)  state <= SreadMem;
-            else                                 state <= Swait4continue;
+            else                    state <= Swait4continue;
         end
         Sreset: begin
             {nxt_duty_l1,nxt_duty_l2,nxt_duty_l3,nxt_duty_r1,nxt_duty_r2,nxt_duty_r3} = {6{8'd150}};
             //isRunningFlag <= 0;
-            state <= Sstop;
+            if (isRunningFlag)  state <= Sbegin;
+            else                state <= Sreset;
         end
 //        SsetOffset: begin
 //            if(setOffsetFlag) begin
@@ -206,10 +223,11 @@ else begin
 //            end
 //        end
         Sstop: begin
-            if (setOffsetFlag)  {nxt_duty_l1,nxt_duty_l2,nxt_duty_l3,nxt_duty_r1,nxt_duty_r2,nxt_duty_r3} = {6{8'd150}};
-            else    {nxt_duty_l1,nxt_duty_l2,nxt_duty_l3,nxt_duty_r1,nxt_duty_r2,nxt_duty_r3} = {cur_duty_l1,cur_duty_l2,cur_duty_l3,cur_duty_r1,cur_duty_r2,cur_duty_r3};
-            if (isRunningFlag)  state <= Sstop;
-            else    state <= Sbegin;
+            //if (setOffsetFlag)  {nxt_duty_l1,nxt_duty_l2,nxt_duty_l3,nxt_duty_r1,nxt_duty_r2,nxt_duty_r3} = {6{8'd150}};
+            {nxt_duty_l1,nxt_duty_l2,nxt_duty_l3,nxt_duty_r1,nxt_duty_r2,nxt_duty_r3} = {cur_duty_l1,cur_duty_l2,cur_duty_l3,cur_duty_r1,cur_duty_r2,cur_duty_r3};
+            if (isRunningFlag)  state <= Sbegin;
+            else if(resetFlag)  state <= Sreset;
+            else                state <= Sstop;
         end
         default: begin
             state <= Sstop;

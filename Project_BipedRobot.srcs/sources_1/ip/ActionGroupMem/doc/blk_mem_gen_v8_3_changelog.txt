@@ -1,3 +1,37 @@
+2017.1:
+ * Version 8.3 (Rev. 6)
+ * General: Internal device family change, no functional changes
+ * General: When common_clock is selected clkb is internally connected to clka, but the interface remains same to support the backword compatiability. User make sure of connecting the both the clocks to same clock source when in common_clock mode
+
+2016.4:
+ * Version 8.3 (Rev. 5)
+ * General: Fixes for behavioral Model issues when built-IN ECC is enabled (to be consistent with RTL)
+
+2016.3:
+ * Version 8.3 (Rev. 4)
+ * Feature Enhancement: URAM addressing updates while calling XPM_Memory when 32-bit addressing is enabled
+ * Other: Enable support for future devices
+ * Other: Source HDL files are concatenated into a single file to speed up synthesis and simulation. No changes required by the user
+
+2016.2:
+ * Version 8.3 (Rev. 3)
+ * updated the IP,not to set WRITE_DEPTH parameter to 8192 everytime when the mode is switched to BRAM_Controller
+ * Updated the IP to support the device package changes
+
+2016.1:
+ * Version 8.3 (Rev. 2)
+ * Updated the IP to deliver only verilog behavioral model
+ * Updated the IP to support UltraRAM in IP Integrator
+ * Updated the IP to support the device package changes
+
+2015.4.2:
+ * Version 8.3 (Rev. 1)
+ * No changes
+
+2015.4.1:
+ * Version 8.3 (Rev. 1)
+ * No changes
+
 2015.4:
  * Version 8.3 (Rev. 1)
  * Updated the IP to support the device package changes
@@ -76,7 +110,7 @@
  * Native Vivado Release
  * There have been no functional or interface changes to this IP.  The version number has changed to support unique versioning in Vivado starting with 2013.1.
 
-(c) Copyright 2002 - 2015 Xilinx, Inc. All rights reserved.
+(c) Copyright 2002 - 2017 Xilinx, Inc. All rights reserved.
 
 This file contains confidential and proprietary information
 of Xilinx, Inc. and is protected under U.S. and
