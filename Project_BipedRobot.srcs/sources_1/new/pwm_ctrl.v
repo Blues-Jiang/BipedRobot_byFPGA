@@ -20,20 +20,28 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module pwm_ctrl(clk,rst_n,isRunningFlag,runLoopFlag,run1StepFlag,setOffsetFlag,resetFlag,out_pwm_l1,out_pwm_l2,out_pwm_l3,out_pwm_r1,out_pwm_r2,out_pwm_r3);
+module pwm_ctrl(clk,rst_n,distance,ActionGroupCtrl,isRunningFlag,runLoopFlag,run1StepFlag,resetFlag,out_pwm_l1,out_pwm_l2,out_pwm_l3,out_pwm_r1,out_pwm_r2,out_pwm_r3,clk_int);
 input clk,rst_n;
 //input [7:0] data;
 output wire out_pwm_l1,out_pwm_l2,out_pwm_l3,out_pwm_r1,out_pwm_r2,out_pwm_r3;//PWM Signal to drive Servos
 
+input [2:0] ActionGroupCtrl;
+input [23:0] distance;
+wire out_of_distance;   //距离过远标志
+wire close_distance;    //距离过近标志
 //Flag List
 //reg updateFlag;     //Depend on 50Hz clock.It's a flag to update the duty cycle
 input runLoopFlag;    //If you need to cycle the action group,this flag should be set as 1
 input run1StepFlag;   //Run action group step by step.
 input isRunningFlag;  //
-input setOffsetFlag;
+//input setOffsetFlag;
 input resetFlag;
+reg onceOffFlag;
 
-wire clk_100kHz,clk_50Hz,clk_50Hz_pulse,clk_50Hz_pulse_jitter;
+wire clk_100kHz,clk_50Hz,clk_50Hz_pulse;
+
+output wire clk_int;
+assign clk_int = clk_50Hz_pulse;
 
 reg [7:0] cur_duty_l1,cur_duty_l2,cur_duty_l3,cur_duty_r1,cur_duty_r2,cur_duty_r3;//Duty Cycle of Servos  ->  Current State
 reg [7:0] nxt_duty_l1,nxt_duty_l2,nxt_duty_l3,nxt_duty_r1,nxt_duty_r2,nxt_duty_r3;//Duty Cycle of Servos  ->  Next State from Action Group
@@ -53,8 +61,8 @@ parameter AddrInit = 9'd0,
     AddrMoveForword = 9'd1,
     AddrMoveBackword = 9'd9,
     AddrTurnLeft = 9'd17,
-    AddrTurnRight = 9'd20;
-    
+    AddrTurnRight = 9'd20,
+    AddrWelcome = 9'd24;
 
 clock_100kHz ins_clk_100kHz(
 .clk(clk),
@@ -66,8 +74,7 @@ clock_50Hz ins_clk_50Hz(
 .clk(clk),
 .rst_n(rst_n),
 .out_50Hz(clk_50Hz),
-.out_50Hz_pulse(clk_50Hz_pulse),
-.out_50Hz_pulse_jitter(clk_50Hz_pulse_jitter)
+.out_50Hz_pulse(clk_50Hz_pulse)
 );
 
 //Servo PWM driver module
@@ -83,7 +90,7 @@ reg [7:0]  writeData;
 reg memEn;
 
 //Menery of Action Group
-ActionGroupMem ins_ActionGroupMem(
+blk_mem_gen_0 ins_ActionGroupMem(
 //Port A writter
 .clka(clk),
 .ena(1'd0),
@@ -106,7 +113,6 @@ always @ ( negedge rst_n )
 begin
     writeData <= 8'd0;
     writeAddr <= 12'd0;
-    curActionGroup <= AddrMoveForword;
 end
 
 reg [7:0] offsetState;
@@ -121,6 +127,34 @@ end
         
 //    end
 //end
+
+assign out_of_distance = (distance[19:12] > 8'b00110000)?1'b1:1'b0;
+assign close_distance  = (distance[19:12] < 8'b00001100)?1'b1:1'b0;
+
+always @ ( posedge clk or negedge rst_n )
+if (!rst_n) begin
+    curActionGroup <= AddrInit;
+end
+else begin
+    case(ActionGroupCtrl)
+        3'b001: curActionGroup <= AddrMoveForword;
+        3'b010: curActionGroup <= AddrMoveBackword;
+        3'b011: begin //keep distance
+            if(out_of_distance)     curActionGroup <= AddrMoveForword;
+            else if(close_distance) curActionGroup <= AddrMoveBackword;
+            else                    curActionGroup <= AddrInit;
+        end
+        3'b100: begin
+            curActionGroup <= AddrWelcome;
+        end
+        //3'b101: curActionGroup <= AddrKick;
+        //3'b110: curActionGroup <= AddrSlide;
+        default:curActionGroup <= AddrInit;
+    endcase
+end
+
+
+
 
 //Update Servo State(cur_pwm <= nxt_pwm)
 always @ ( posedge clk_50Hz_pulse )//Driven variable:cur_duty_xx
@@ -155,6 +189,7 @@ end
 always @ ( posedge clk or negedge rst_n )//Driven variable:nxt_duty_xx,takeTime,Addr of memory
 if(!rst_n) begin
     state <= Sstop;
+    onceOffFlag <= 0;
     memEn <= 0;
 end
 else begin

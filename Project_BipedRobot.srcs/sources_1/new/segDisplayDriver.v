@@ -56,10 +56,10 @@ always @ (dig_ctrl)
     endcase
 //----------------------------------------------------------
 //解码模块
-reg [7:0]seg_reg;
+reg [7:0] seg_reg;
 
-always @(seg_ctrl)
-    case(seg_ctrl)
+always @( seg_ctrl )
+    case( seg_ctrl )
         4'h0:   seg_reg = 8'b1100_0000;//0
         4'h1:   seg_reg = 8'b1111_1001;//1
         4'h2:   seg_reg = 8'b1010_0100;//2
@@ -70,20 +70,20 @@ always @(seg_ctrl)
         4'h7:   seg_reg = 8'b1111_1000;//7
         4'h8:   seg_reg = 8'b1000_0000;//8
         4'h9:   seg_reg = 8'b1001_0000;//9
-        4'ha:   seg_reg = 8'b1100_0111;//L
-        4'hb:   seg_reg = 8'b1010_1111;//r
+        //4'ha:   seg_reg = 8'b1100_0111;//L
+        //4'hb:   seg_reg = 8'b1010_1111;//r
         
-        //        4'ha:   seg_reg = 8'b1000_1000;//a
-        //        4'hb:   seg_reg = 8'b1000_0011;//b
-        //        4'hc:   seg_reg = 8'b1100_0110;//c
-        //        4'hd:   seg_reg = 8'b1010_0001;//d
-
+//        4'ha:   seg_reg = 8'b1000_1000;//a
 //        4'hb:   seg_reg = 8'b1000_0011;//b
 //        4'hc:   seg_reg = 8'b1100_0110;//c
 //        4'hd:   seg_reg = 8'b1010_0001;//d
-//        4'he:   seg_reg = 8'b1000_0110;//e
-//        4'hf:   seg_reg = 8'b1000_1110;//f
-        // 4'hf:seg_reg=8'b1111_1111;//不显示
+        4'ha:   seg_reg = 8'b1000_1000;//a
+        4'hb:   seg_reg = 8'b1000_0011;//b
+        4'hc:   seg_reg = 8'b1100_0110;//c
+        4'hd:   seg_reg = 8'b1010_0001;//d
+        4'he:   seg_reg = 8'b1000_0110;//e
+        4'hf:   seg_reg = 8'b1000_1110;//f
+//         4'hf:seg_reg=8'b1111_1111;//不显示
         default : seg_reg = 8'b1011_1111;//-
     endcase
 //----------------------------------------------------------

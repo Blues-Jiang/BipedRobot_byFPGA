@@ -28,7 +28,7 @@ module UART_rx(
         RS232_rx,
         rx_data,
         rx_int,
-        led
+        data_out
     );
     input clk;   //时钟
     input rst_n;  //复位
@@ -37,7 +37,7 @@ module UART_rx(
     output bps_start; //接收信号时,波特率时钟信号置位
     output [7:0] rx_data;//接收数据寄存器
     output rx_int;  //接收数据中断信号,接收过程中为高
-    output reg [7:0]led;
+    output reg [7:0]data_out;
     reg RS232_rx0,RS232_rx1,RS232_rx2,RS232_rx3;//接收数据寄存器
     wire neg_RS232_rx;//表示数据线接收到下沿
     
@@ -100,7 +100,7 @@ module UART_rx(
         4'd8: rx_temp_data[7] <= RS232_rx;
         default: ;
       endcase
-      led <= rx_temp_data;
+      data_out <= rx_temp_data;
      end
      else if(num==4'd12) begin
       num <= 4'd0;   //数据接收完毕

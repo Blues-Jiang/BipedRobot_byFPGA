@@ -20,22 +20,14 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module UART_tx(
-        clk,
-        rst_n,
-        bps_start,
-        clk_bps,
-        RS232_tx,
-        rx_data,
-        rx_int
-    );
-input clk;
-input rst_n;
-input clk_bps;  //中间采样点
-input [7:0] rx_data;    //接收数据寄存器
-input rx_int;   //数据接收中断信号
-output RS232_tx;    //发送数据信号
-output bps_start;   //发送信号置位
+module UART_tx(clk,rst_n,bps_start,clk_bps,RS232_tx,rx_data,rx_int);
+ input clk;
+    input rst_n;
+    input clk_bps;//中间采样点
+    input [7:0] rx_data;//接收数据寄存器
+    input rx_int;//数据接收中断信号
+    output RS232_tx;//发送数据信号
+    output bps_start;//发送信号置位
     
     reg rx_int0,rx_int1,rx_int2;//信号寄存器,捕捉下降沿
     wire neg_rx_int;    //下降沿标志
@@ -107,3 +99,4 @@ output bps_start;   //发送信号置位
   end
   assign RS232_tx =RS232_tx_r;
 endmodule
+

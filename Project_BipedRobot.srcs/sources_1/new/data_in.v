@@ -20,13 +20,14 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module data_in(clk,rst_n,sw,btn,DIPsw,isRunningFlag,runLoopFlag,run1StepFlag,resetFlag);
+module data_in(clk,rst_n,sw,btn,DIPsw,isRunningFlag,runLoopFlag,run1StepFlag,resetFlag,agCtrlFlag);
 input clk,rst_n;
 input sw;
 input [4:0] btn;
 input [3:0] DIPsw;
 //input [7:0] din;
 
+output wire [3:0] agCtrlFlag;
 output wire isRunningFlag;
 output wire runLoopFlag;
 output wire run1StepFlag;
@@ -34,14 +35,20 @@ output wire resetFlag;
 //output wire setOffsetFlag;
 
 wire runLoopFlag_n,run1StepFlag_n,resetFlag_n;
+wire [3:0] agCtrlFlag_n;
 assign runLoopFlag = ~runLoopFlag_n;
 assign run1StepFlag = ~run1StepFlag_n;
 assign resetFlag = ~resetFlag_n;
+assign agCtrlFlag = ~agCtrlFlag_n;
 
-btn2btn sw_isRunning(.clk(clk),.rst_n(rst_n),.din(sw),.flag(isRunningFlag));
-btn2sw  btn_runLoop(.clk(clk),.rst_n(rst_n),.din(btn[0]),.flag(runLoopFlag_n));
-btn2btn  btn_run1Step(.clk(clk),.rst_n(rst_n),.din(btn[1]),.flag(run1StepFlag_n));
-btn2btn  btn_reset(.clk(clk),.rst_n(rst_n),.din(btn[4]),.flag(resetFlag_n));
+btn2btn     sw_isRunning(.clk(clk),.rst_n(rst_n),.din(sw),.flag(isRunningFlag));
+btn2sw      btn_runLoop(.clk(clk),.rst_n(rst_n),.din(btn[0]),.flag(runLoopFlag_n));
+btn2btn     btn_run1Step(.clk(clk),.rst_n(rst_n),.din(btn[1]),.flag(run1StepFlag_n));
+btn2btn     btn_reset(.clk(clk),.rst_n(rst_n),.din(btn[4]),.flag(resetFlag_n));
+btn2btn     btn_agCtrl0(.clk(clk),.rst_n(rst_n),.din(DIPsw[0]),.flag(agCtrlFlag_n[0]));
+btn2btn     btn_agCtrl1(.clk(clk),.rst_n(rst_n),.din(DIPsw[1]),.flag(agCtrlFlag_n[1]));
+btn2btn     btn_agCtrl2(.clk(clk),.rst_n(rst_n),.din(DIPsw[2]),.flag(agCtrlFlag_n[2]));
+btn2btn     btn_agCtrl3(.clk(clk),.rst_n(rst_n),.din(DIPsw[3]),.flag(agCtrlFlag_n[3]));
 //btn2sw btn_setOffset(.clk(clk),.rst_n(rst_n),.din(sw),.flag(!setOffsetFlag));
 
 endmodule
