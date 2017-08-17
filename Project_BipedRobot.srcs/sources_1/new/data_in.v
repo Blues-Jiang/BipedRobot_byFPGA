@@ -20,17 +20,17 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module data_in(clk,rst_n,sw,btn,DIPsw,isRunningFlag,runLoopFlag,run1StepFlag,resetFlag,agCtrlFlag);
+module data_in(clk,rst_n,sw,btn,DIPsw,isRunningFlag,resetFlag,agCtrlFlag);
 input clk,rst_n;
 input sw;
 input [4:0] btn;
 input [3:0] DIPsw;
 //input [7:0] din;
 
-output wire [3:0] agCtrlFlag;
+output reg [3:0] agCtrlFlag;
 output wire isRunningFlag;
-output wire runLoopFlag;
-output wire run1StepFlag;
+//output wire runLoopFlag;
+//output wire run1StepFlag;
 output wire resetFlag;
 //output wire setOffsetFlag;
 
@@ -39,16 +39,57 @@ wire [3:0] agCtrlFlag_n;
 assign runLoopFlag = ~runLoopFlag_n;
 assign run1StepFlag = ~run1StepFlag_n;
 assign resetFlag = ~resetFlag_n;
-assign agCtrlFlag = ~agCtrlFlag_n;
+//assign agCtrlFlag = ~agCtrlFlag_n;
+
+always @ ( agCtrlFlag_n )
+begin
+    case(agCtrlFlag)
+        4'b0001: begin
+            if (agCtrlFlag_n[0] == 0)       agCtrlFlag <= 4'b0000;
+            else if(agCtrlFlag_n[1] == 0)   agCtrlFlag <= 4'b0010;
+            else if(agCtrlFlag_n[2] == 0)   agCtrlFlag <= 4'b0100;
+            else if(agCtrlFlag_n[3] == 0)   agCtrlFlag <= 4'b1000;
+            else                            agCtrlFlag <= 4'b0001;
+        end
+        4'b0010: begin
+            if (agCtrlFlag_n[0] == 0)       agCtrlFlag <= 4'b0001;
+            else if(agCtrlFlag_n[1] == 0)   agCtrlFlag <= 4'b0000;
+            else if(agCtrlFlag_n[2] == 0)   agCtrlFlag <= 4'b0100;
+            else if(agCtrlFlag_n[3] == 0)   agCtrlFlag <= 4'b1000;
+            else                            agCtrlFlag <= 4'b0010;
+        end
+        4'b0100: begin
+            if (agCtrlFlag_n[0] == 0)       agCtrlFlag <= 4'b0001;
+            else if(agCtrlFlag_n[1] == 0)   agCtrlFlag <= 4'b0010;
+            else if(agCtrlFlag_n[2] == 0)   agCtrlFlag <= 4'b0000;
+            else if(agCtrlFlag_n[3] == 0)   agCtrlFlag <= 4'b1000;
+            else                            agCtrlFlag <= 4'b0100;
+        end
+        4'b1000: begin
+            if (agCtrlFlag_n[0] == 0)       agCtrlFlag <= 4'b0001;
+            else if(agCtrlFlag_n[1] == 0)   agCtrlFlag <= 4'b0010;
+            else if(agCtrlFlag_n[2] == 0)   agCtrlFlag <= 4'b0100;
+            else if(agCtrlFlag_n[3] == 0)   agCtrlFlag <= 4'b0000;
+            else                            agCtrlFlag <= 4'b1000;
+        end
+        default: begin
+            if(agCtrlFlag_n[0] == 0)        agCtrlFlag <= 4'b0001;
+            else if(agCtrlFlag_n[1] == 0)   agCtrlFlag <= 4'b0010;
+            else if(agCtrlFlag_n[2] == 0)   agCtrlFlag <= 4'b0100;
+            else if(agCtrlFlag_n[3] == 0)   agCtrlFlag <= 4'b1000;
+            else                            agCtrlFlag <= 4'b0000;
+        end
+    endcase
+end
 
 btn2btn     sw_isRunning(.clk(clk),.rst_n(rst_n),.din(sw),.flag(isRunningFlag));
-btn2sw      btn_runLoop(.clk(clk),.rst_n(rst_n),.din(btn[0]),.flag(runLoopFlag_n));
-btn2btn     btn_run1Step(.clk(clk),.rst_n(rst_n),.din(btn[1]),.flag(run1StepFlag_n));
+//btn2sw      btn_runLoop(.clk(clk),.rst_n(rst_n),.din(btn[0]),.flag(runLoopFlag_n));
+//btn2btn     btn_run1Step(.clk(clk),.rst_n(rst_n),.din(btn[1]),.flag(run1StepFlag_n));
 btn2btn     btn_reset(.clk(clk),.rst_n(rst_n),.din(btn[4]),.flag(resetFlag_n));
-btn2btn     btn_agCtrl0(.clk(clk),.rst_n(rst_n),.din(DIPsw[0]),.flag(agCtrlFlag_n[0]));
-btn2btn     btn_agCtrl1(.clk(clk),.rst_n(rst_n),.din(DIPsw[1]),.flag(agCtrlFlag_n[1]));
-btn2btn     btn_agCtrl2(.clk(clk),.rst_n(rst_n),.din(DIPsw[2]),.flag(agCtrlFlag_n[2]));
-btn2btn     btn_agCtrl3(.clk(clk),.rst_n(rst_n),.din(DIPsw[3]),.flag(agCtrlFlag_n[3]));
+btn2btn     btn_agCtrl0(.clk(clk),.rst_n(rst_n),.din(btn[0]),.flag(agCtrlFlag_n[0]));
+btn2btn     btn_agCtrl1(.clk(clk),.rst_n(rst_n),.din(btn[1]),.flag(agCtrlFlag_n[1]));
+btn2btn     btn_agCtrl2(.clk(clk),.rst_n(rst_n),.din(btn[2]),.flag(agCtrlFlag_n[2]));
+btn2btn     btn_agCtrl3(.clk(clk),.rst_n(rst_n),.din(btn[3]),.flag(agCtrlFlag_n[3]));
 //btn2sw btn_setOffset(.clk(clk),.rst_n(rst_n),.din(sw),.flag(!setOffsetFlag));
 
 endmodule

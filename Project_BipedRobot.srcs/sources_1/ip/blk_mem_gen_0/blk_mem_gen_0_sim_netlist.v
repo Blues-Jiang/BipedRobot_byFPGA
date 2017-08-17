@@ -1,7 +1,7 @@
 // Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2017.1 (win64) Build 1846317 Fri Apr 14 18:55:03 MDT 2017
-// Date        : Mon Jul 31 18:59:20 2017
+// Date        : Tue Aug  1 10:07:10 2017
 // Host        : ACER-BLUES running 64-bit major release  (build 9200)
 // Command     : write_verilog -force -mode funcsim
 //               D:/Design_Project/E_elements/Project_BipedRobot/Project_BipedRobot.srcs/sources_1/ip/blk_mem_gen_0/blk_mem_gen_0_sim_netlist.v

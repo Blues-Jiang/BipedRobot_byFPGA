@@ -32,7 +32,7 @@ reg [31:0] clk_cnt;
 reg clk_500Hz;
 
 always @ (posedge clk)
-    if(clk_cnt == 32'd100_000) begin
+    if(clk_cnt == 32'd200_000) begin
         clk_cnt <= 1'b0;
         clk_500Hz <= ~clk_500Hz;
     end
@@ -45,46 +45,46 @@ always @(posedge clk_500Hz)
 dig_ctrl <= { dig_ctrl[2:0], dig_ctrl[3] };
 
 //Segment Control
-reg [3:0] seg_ctrl;
+reg [4:0] seg_ctrl;
 always @ (dig_ctrl)
     case(dig_ctrl)
-        4'b1110:    seg_ctrl=data[3:0];
-        4'b1101:    seg_ctrl=data[7:4];
-        4'b1011:    seg_ctrl=data[11:8];
-        4'b0111:    seg_ctrl=data[15:12];
-        default:      seg_ctrl=4'hf;
+        4'b1110:    seg_ctrl={1'b0,data[3:0]};
+        4'b1101:    seg_ctrl={1'b0,data[7:4]};
+        4'b1011:    seg_ctrl={1'b0,data[11:8]};
+        4'b0111:    seg_ctrl={1'b0,data[15:12]};
+        default:      seg_ctrl=5'h1f;
     endcase
 //----------------------------------------------------------
 //解码模块
 reg [7:0] seg_reg;
-
+//seg_reg = {dp,g,f,e,d,c,b,a}
 always @( seg_ctrl )
     case( seg_ctrl )
-        4'h0:   seg_reg = 8'b1100_0000;//0
-        4'h1:   seg_reg = 8'b1111_1001;//1
-        4'h2:   seg_reg = 8'b1010_0100;//2
-        4'h3:   seg_reg = 8'b1011_0000;//3
-        4'h4:   seg_reg = 8'b1001_1001;//4
-        4'h5:   seg_reg = 8'b1001_0010;//5
-        4'h6:   seg_reg = 8'b1000_0010;//6
-        4'h7:   seg_reg = 8'b1111_1000;//7
-        4'h8:   seg_reg = 8'b1000_0000;//8
-        4'h9:   seg_reg = 8'b1001_0000;//9
-        //4'ha:   seg_reg = 8'b1100_0111;//L
-        //4'hb:   seg_reg = 8'b1010_1111;//r
-        
-//        4'ha:   seg_reg = 8'b1000_1000;//a
-//        4'hb:   seg_reg = 8'b1000_0011;//b
-//        4'hc:   seg_reg = 8'b1100_0110;//c
-//        4'hd:   seg_reg = 8'b1010_0001;//d
-        4'ha:   seg_reg = 8'b1000_1000;//a
-        4'hb:   seg_reg = 8'b1000_0011;//b
-        4'hc:   seg_reg = 8'b1100_0110;//c
-        4'hd:   seg_reg = 8'b1010_0001;//d
-        4'he:   seg_reg = 8'b1000_0110;//e
-        4'hf:   seg_reg = 8'b1000_1110;//f
-//         4'hf:seg_reg=8'b1111_1111;//不显示
-        default : seg_reg = 8'b1011_1111;//-
+        5'h00:  seg_reg = 8'b1100_0000;//0
+        5'h01:  seg_reg = 8'b1111_1001;//1
+        5'h02:  seg_reg = 8'b1010_0100;//2
+        5'h03:  seg_reg = 8'b1011_0000;//3
+        5'h04:  seg_reg = 8'b1001_1001;//4
+        5'h05:  seg_reg = 8'b1001_0010;//5
+        5'h06:  seg_reg = 8'b1000_0010;//6
+        5'h07:  seg_reg = 8'b1111_1000;//7
+        5'h08:  seg_reg = 8'b1000_0000;//8
+        5'h09:  seg_reg = 8'b1001_0000;//9
+        5'h0a:  seg_reg = 8'b1000_1000;//a
+        5'h0b:  seg_reg = 8'b1000_0011;//b
+        5'h0c:  seg_reg = 8'b1100_0110;//c
+        5'h0d:  seg_reg = 8'b1010_0001;//d
+        5'h0e:  seg_reg = 8'b1000_0110;//e
+        5'h0f:  seg_reg = 8'b1000_1110;//f
+        5'h10:  seg_reg = 8'b1111_1111;//None
+        5'h11:  seg_reg = 8'b1100_0111;//L
+        5'h12:  seg_reg = 8'b1010_1111;//r
+        5'h13:  seg_reg = 8'b1010_0001;//d
+        5'h14:  seg_reg = 8'b1010_0011;//o
+        5'h15:  seg_reg = 8'b1010_1011;//n
+        5'h16:  seg_reg = 8'b1000_0110;//e
+//         5'hf:seg_reg=8'b1111_1111;//不显示
+        default:seg_reg = 8'b1111_1111;//None
     endcase
 //----------------------------------------------------------
 assign out_dig = dig_ctrl;
