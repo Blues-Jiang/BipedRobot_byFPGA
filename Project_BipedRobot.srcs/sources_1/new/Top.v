@@ -24,15 +24,28 @@
 //  LDX-218 <- pwm_l2 | pwm_r2 -> LDX-218
 //  LDX-218 <- pwm_l3 | pwm_r3 -> LDX-218
 
-module Top(clk,rst_n,sw,btn,DIPsw,trig,echo,RS232_rx,RS232_tx,LED,dig,seg,out_pwm_l1,out_pwm_l2,out_pwm_l3,out_pwm_r1,out_pwm_r2,out_pwm_r3);
+module Top( clk,rst_n,
+            sw,btn,DIPsw,LED,
+            trig,echo,
+            RS232_rx,RS232_tx,
+            SCL,SDA,
+            dig,seg,
+            out_pwm_l1,out_pwm_l2,out_pwm_l3,out_pwm_r1,out_pwm_r2,out_pwm_r3
+            );
+//Defcult system clock and reset signal
 input clk,rst_n;
+//Button and switch signal
 input sw;
 input [4:0] btn;
 input [3:0] DIPsw;
+//Signal for UART Bluetooth module
 input RS232_rx;
 output RS232_tx;
+//Signal for UltraSonic module
 input echo;
 output trig;
+//Signal for I2C module 24C02
+inout SCL, SDA;
 
 output [3:0] dig;
 output [7:0] seg;
@@ -47,8 +60,11 @@ wire interrupt;
 wire [7:0] bt_data;
 wire [23:0] distance;
 
+wire SCL_en,SCL_o,SDA_en,SDA_o;
+reg SCL_i,SDA_i;
+
 //Bluetooth Module
-UART_top Bluetooth(
+UART_top ins_Bluetooth(
 .clk(clk),
 .rst_n(rst_n),
 .tx_int(interrupt),
@@ -56,6 +72,29 @@ UART_top Bluetooth(
 .RS232_rx(RS232_rx),
 .RS232_tx(RS232_tx),
 .data_out(bt_data)
+);
+
+//I2C module 24C02
+assign SCL = (SCL_en)?1'bz:SCL_o;//enable is low meant to write
+assign SDA = (SDA_en)?1'bz:SDA_o;
+
+always @ (SCL_en)//read the inout port when enable signal is high
+    if(SCL_en)  SCL_i = SCL;
+always @ (SDA_en)
+    if(SDA_en)  SDA_i = SDA;
+
+EEPROM_Top ins_24C02(
+.clk(clk),
+.rst_n(rst_n),
+.rw_en(),
+.data_in(),
+.data_out(),
+.SCL_en(SCL_en),
+.SCL_o(SCL_o),
+.SCL_i(SCL_i),
+.SDA_en(SDA_en),
+.SDA_o(SDA_o),
+.SDA_i(SDA_i)
 );
 
 assign LED[0] = isRunningFlag;
