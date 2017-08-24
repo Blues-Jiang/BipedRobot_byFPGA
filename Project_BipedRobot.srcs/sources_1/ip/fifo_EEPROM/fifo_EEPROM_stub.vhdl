@@ -1,10 +1,10 @@
 -- Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2017.1 (win64) Build 1846317 Fri Apr 14 18:55:03 MDT 2017
--- Date        : Fri Aug 18 15:24:18 2017
+-- Date        : Thu Aug 24 05:36:23 2017
 -- Host        : ACER-BLUES running 64-bit major release  (build 9200)
 -- Command     : write_vhdl -force -mode synth_stub
---               d:/Design_Project/E_elements/Project_BipedRobot/Project_BipedRobot.srcs/sources_1/ip/fifo_EEPROM/fifo_EEPROM_stub.vhdl
+--               D:/Design_Project/E_elements/Project_BipedRobot/Project_BipedRobot.srcs/sources_1/ip/fifo_EEPROM/fifo_EEPROM_stub.vhdl
 -- Design      : fifo_EEPROM
 -- Purpose     : Stub declaration of top-level module interface
 -- Device      : xc7a35tcsg324-1

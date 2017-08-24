@@ -97,6 +97,9 @@ EEPROM_Top ins_24C02(
 .SDA_i(SDA_i)
 );
 
+write_en, flag_write_done,flag_error,flag_read_done,
+
+
 assign LED[0] = isRunningFlag;
 assign LED[1] = resetFlag;
 assign LED[7:4] = hwCtrlActionGroup;
